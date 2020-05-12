@@ -1,0 +1,81 @@
+
+buildscript {
+    ext.BOM = 'it.scoppelletti.spaceship:spaceship-bom:1.0.0'
+    ext.android_gradle_version = '3.6.1'
+
+    repositories {
+        jcenter()
+
+        if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
+            maven {
+                url project.property('it.scoppelletti.tools.devRepoUrl')
+            }
+        }
+    }
+    dependencies {
+        classpath platform(BOM)
+        classpath 'com.github.ben-manes:gradle-versions-plugin'
+        classpath 'it.scoppelletti.spaceship:spaceship-gradle-java'
+    }
+}
+
+plugins {
+    id 'java-library'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'it.scoppelletti.spaceship.spaceship-gradle-java'
+
+group 'it.scoppelletti.spaceship'
+version '1.0.0'
+description 'Spaceship Gradle Plugin for Android libraries'
+archivesBaseName = 'spaceship-gradle-android'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+gradlePlugin {
+    plugins {
+        spaceshipAndroid {
+            id = 'it.scoppelletti.spaceship.spaceship-gradle-android'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.android.SpaceshipAndroidPlugin'
+        }
+    }
+}
+
+spaceship {
+    url = 'http://github.com/dscoppelletti/spaceship-gradle-android'
+    scmUrl = 'git@github.com:dscoppelletti/spaceship-gradle-android.git'
+    inceptionYear = '2019-2020'
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    google()
+
+    if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
+        maven {
+            url project.property('it.scoppelletti.tools.devRepoUrl')
+        }
+    }
+}
+
+configurations {
+    bom
+    api.extendsFrom(bom)
+    annotationProcessor.extendsFrom(bom)
+}
+
+dependencies {
+    bom platform(BOM)
+    api gradleApi()
+    api "com.android.tools.build:gradle:${android_gradle_version}"
+    api 'it.scoppelletti.spaceship:spaceship-gradle'
+    api 'org.jetbrains.dokka:dokka-gradle-plugin'
+    implementation 'org.apache.commons:commons-lang3'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
