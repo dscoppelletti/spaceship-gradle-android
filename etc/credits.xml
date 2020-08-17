@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<credits xmlns="http://www.scoppelletti.it/ns/credits/1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scoppelletti.it/ns/credits/1 http://www.scoppelletti.it/res/spaceship/gradle/android/tasks/credits1.xsd">
+    <credit key="androidJetpack">
+        <component><![CDATA[<a href="http://developer.android.com/jetpack">Android Jetpack</a>]]></component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="androidx.activity" artifactId="activity" />
+            <artifact groupId="androidx.activity" artifactId="activity-ktx" />
+            <artifact groupId="androidx.annotation" artifactId="annotation" />
+            <artifact groupId="androidx.appcompat" artifactId="appcompat" />
+            <artifact groupId="androidx.browser" artifactId="browser" />
+            <artifact groupId="androidx.constraintlayout" artifactId="constraintlayout" />
+            <artifact groupId="androidx.coordinatorlayout" artifactId="coordinatorlayout" />
+            <artifact groupId="androidx.databinding" artifactId="databinding-adapters" />
+            <artifact groupId="androidx.databinding" artifactId="databinding-common" />
+            <artifact groupId="androidx.databinding" artifactId="databinding-runtime" />
+            <artifact groupId="androidx.databinding" artifactId="viewbinding" />
+            <artifact groupId="androidx.fragment" artifactId="fragment" />
+            <artifact groupId="androidx.fragment" artifactId="fragment-ktx" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-common-java8" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-livedata" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-livedata-ktx" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-runtime" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-runtime-ktx" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-viewmodel" />
+            <artifact groupId="androidx.lifecycle" artifactId="lifecycle-viewmodel-ktx" />
+            <artifact groupId="androidx.navigation" artifactId="navigation-fragment-ktx" />
+            <artifact groupId="androidx.navigation" artifactId="navigation-safe-args-gradle-plugin" />
+            <artifact groupId="androidx.navigation" artifactId="navigation-ui-ktx" />
+            <artifact groupId="androidx.preference" artifactId="preference" />
+            <artifact groupId="androidx.preference" artifactId="preference-ktx" />
+            <artifact groupId="androidx.recyclerview" artifactId="recyclerview" />
+            <artifact groupId="androidx.swiperefreshlayout" artifactId="swiperefreshlayout" />
+            <artifact groupId="androidx.viewpager2" artifactId="viewpager2" />
+        </artifacts>
+    </credit>
+    <credit key="androidLogger">
+        <component><![CDATA[<a href="http://noveogroup.github.io/android-logger">Android Logger</a>]]></component>
+        <owner><![CDATA[<a href="http://noveogroup.com">Noveo Group</a>]]></owner>
+        <licenseRef keyref="mit" />
+        <artifacts>
+            <artifact groupId="com.noveogroup.android" artifactId="android-logger" />
+        </artifacts>
+    </credit>
+    <credit key="androidPlatform">
+        <component><![CDATA[<a href="http://developer.android.com">Android Platform</a>]]></component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="android" />
+        <!-- TODO - Android Platform -->
+    </credit>
+    <credit key="androidStudio">
+        <component><![CDATA[<a href="http://developer.android.com/studio/index.html">Android Studio</a>]]></component>
+        <owner><![CDATA[<a href="http://www.google.com">Google, Inc.</a>, <a href="http://www.jetbrains.com>JetBrains s.r.o.</a>]]></owner>
+        <licenseRef keyref="android" />
+        <artifacts>
+            <artifact groupId="com.android.tools.build" artifactId="gradle" />
+        </artifacts>
+    </credit>
+    <credit key="bouncyCastle">
+        <component><![CDATA[<a href="http://www.bouncycastle.org/java.html">Bouncy Castle Crypto APIs</a>]]></component>
+        <owner><![CDATA[<a href="http://www.bouncycastle.org">The Legion of the Bouncy Castle Inc.</a>]]></owner>
+        <license><![CDATA[<a href="http://www.bouncycastle.org/licence.html">Bouncy Castle License</a>]]></license>
+        <artifacts>
+            <artifact groupId="org.bouncycastle" artifactId="bcprov-jdk15on" />
+        </artifacts>
+    </credit>
+    <credit key="commonsLang">
+        <component><![CDATA[<a href="http://commons.apache.org/proper/commons-lang">Commons Lang</a>]]></component>
+        <owner><![CDATA[<a href="http://commons.apache.org/proper/commons-lang/team.html">Commons Lang Team</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="org.apache.commons" artifactId="commons-lang3" />
+        </artifacts>
+    </credit>
+    <credit key="dagger2">
+        <component><![CDATA[<a href="http://google.github.io/dagger">Dagger 2</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/google/dagger/blob/master/AUTHORS">The Dagger Authors</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.dagger" artifactId="dagger" />
+            <artifact groupId="com.google.dagger" artifactId="dagger-compiler" />
+        </artifacts>
+    </credit>
+    <credit key="dokka">
+        <component><![CDATA[<a href="http://github.com/Kotlin/dokka">Dokka</a>]]></component>
+        <ownerRef keyref="jetbrains" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="org.jetbrains.dokka" artifactId="dokka-gradle-plugin" />
+        </artifacts>
+    </credit>
+    <credit key="exoplayer">
+        <component><![CDATA[<a href="http://explayer.dev">Exo Player</a>]]></component>
+        <ownerRef keyref="googleOS" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.android.exoplayer" artifactId="exoplayer-core" />
+            <artifact groupId="com.google.android.exoplayer" artifactId="exoplayer-ui" />
+        </artifacts>
+    </credit>
+    <credit key="facebook">
+        <component><![CDATA[<a href="http://developers.facebook.com/docs/android">Facebook SDK for Android</a>]]></component>
+        <owner><![CDATA[<a href="http://about.fb.com">Facebook</a>]]></owner>
+        <license><![CDATA[<a href="http://github.com/facebook/facebook-android-sdk/blob/master/LICENSE.txt">Facebook Platform License</a>]]></license>
+        <artifacts>
+            <artifact groupId="com.facebook.android" artifactId="facebook-android-sdk" />
+            <artifact groupId="com.facebook.android" artifactId="facebook-login" />
+        </artifacts>
+    </credit>
+    <credit key="firebase">
+        <component><![CDATA[<a href="http://firebase.google.com">Firebase SDK</a>]]></component>
+        <ownerRef keyref="google" />
+        <licenseRef keyref="android" />
+        <artifacts>
+            <artifact groupId="com.crashlytics.sdk.android" artifactId="crashlytics" />
+            <artifact groupId="com.google.firebase" artifactId="firebase-auth" />
+            <artifact groupId="com.google.firebase" artifactId="firebase-core" />
+            <artifact groupId="com.google.firebase" artifactId="firebase-messaging" />
+            <artifact groupId="io.fabric.tools" artifactId="gradle" />
+        </artifacts>
+    </credit>
+    <credit key="genymotion">
+        <component><![CDATA[<a href="http://www.genymotion.com">Genymotion</a>]]></component>
+        <owner><![CDATA[<a href="http://www.genymobile.com">Genymobile SAS</a>]]></owner>
+        <license><![CDATA[<a href="http://www.genymotion.com/legal/terms-and-conditions">Free for Personal Use</a>]]></license>
+        <!-- Genymotion -->
+    </credit>
+    <credit key="glide">
+        <component><![CDATA[<a href="http://bumptech.github.io/glide">Glide</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/bumptech">Bump Technologies</a>]]></owner>
+        <license><![CDATA[<a href="http://github.com/bumptech/glide/blob/master/LICENSE">BSD, MIT, Apache 2.0</a>]]></license>
+        <artifacts>
+            <artifact groupId="com.github.bumptech.glide" artifactId="annotations" />
+            <artifact groupId="com.github.bumptech.glide" artifactId="compiler" />
+            <artifact groupId="com.github.bumptech.glide" artifactId="glide" />
+        </artifacts>
+    </credit>
+    <credit key="googleMaps">
+        <component><![CDATA[<a href="http://cloud.google.com/maps-platform">Google Maps Platform</a>]]></component>
+        <ownerRef keyref="google" />
+        <license><![CDATA[<a href="http://cloud.google.com/maps-platform/terms">Google Maps Platform Terms of Service</a>]]></license>
+        <artifacts>
+            <artifact groupId="com.google.android.gms" artifactId="play-services-maps" />
+            <artifact groupId="com.google.android.libraries.places" artifactId="places" />
+            <artifact groupId="com.google.maps.android" artifactId="android-maps-utils" />
+        </artifacts>
+    </credit>
+    <credit key="googlePlayServices">
+        <component><![CDATA[<a href="http://developers.google.com/android/guides/overview">Google Play Services</a>]]></component>
+        <ownerRef keyref="google" />
+        <licenseRef keyref="android" />
+        <artifacts>
+            <artifact groupId="com.google.android.gms" artifactId="play-services-auth" />
+            <artifact groupId="com.google.android.gms" artifactId="play-services-base" />
+            <artifact groupId="com.google.android.gms" artifactId="play-services-location" />
+            <artifact groupId="com.google.android.gms" artifactId="play-services-oss-licenses" />
+        </artifacts>
+    </credit>
+    <credit key="googlePlayServicesPlugins">
+        <component><![CDATA[<a href="http://developers.google.com/android/guides/overview">Google Play Services Plugins</a>]]></component>
+        <ownerRef keyref="googleOS" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.gms" artifactId="google-services" />
+            <artifact groupId="com.google.android.gms" artifactId="oss-licenses-plugin" />
+        </artifacts>
+    </credit>
+    <credit key="gradle">
+        <component><![CDATA[<a href="http://gradle.org">Gradle</a>]]></component>
+        <owner><![CDATA[<a href="http://gradle.com">Gradle, Inc.</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <!-- Gradle -->
+    </credit>
+    <credit key="gradleVersionPlugin">
+        <component><![CDATA[<a href="http://github.com/ben-manes/gradle-versions-plugin">Gradle Version Plugin</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/ben-manes">Ben Manes</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.github.ben-manes" artifactId="gradle-versions-plugin" />
+        </artifacts>
+    </credit>
+    <credit key="intellij">
+        <component><![CDATA[<a href="http://www.jetbrains.com/idea">IntelliJ IDEA</a>]]></component>
+        <ownerRef keyref="jetbrains" />
+        <license>Community Edition</license>
+        <!-- IntelliJ IDEA -->
+    </credit>
+    <credit key="junit">
+        <component><![CDATA[<a href="http://junit.org">JUnit</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/junit-team">The JUnit Team</a>]]></owner>
+        <license><![CDATA[<a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License, Version 1.0</a>]]></license>
+        <artifacts>
+            <artifact groupId="junit" artifactId="junit" />
+        </artifacts>
+    </credit>
+    <credit key="kotlin">
+        <component><![CDATA[<a href="http://kotlinlang.org">Kotlin</a>]]></component>
+        <ownerRef keyref="jetbrains" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-android-extensions-runtime" />
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-gradle-plugin" />
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-stdlib-jdk8" />
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-test" />
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-test-junit" />
+            <artifact groupId="org.jetbrains.kotlinx" artifactId="kotlinx-coroutines-android" />
+            <artifact groupId="org.jetbrains.kotlinx" artifactId="kotlinx-coroutines-core" />
+        </artifacts>
+    </credit>
+    <credit key="kotlinLogging">
+        <component><![CDATA[<a href="http://github.com/MicroUtils/kotlin-logging">kotlin-logging</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/MicroUtils">MicroUtils</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="io.github.microutils" artifactId="kotlin-logging" />
+        </artifacts>
+    </credit>
+    <credit key="lombok">
+        <component><![CDATA[<a href="http://projectlombok.org">Project Lombok</a>]]></component>
+        <owner><![CDATA[<a href="http://projectlombok.org/credits">Authors and contributors</a>]]></owner>
+        <licenseRef keyref="mit" />
+        <artifacts>
+            <artifact groupId="org.projectlombok" artifactId="lombok" />
+        </artifacts>
+    </credit>
+    <credit key="materialComponents">
+        <component><![CDATA[<a href="http://material.io/develop/android">Material Design Components for Android</a>]]></component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.android.material" artifactId="material" />
+        </artifacts>
+    </credit>
+    <credit key="materialIcons">
+        <component><![CDATA[<a href="http://google.github.io/material-design-icons">Material design icons</a>]]></component>
+        <ownerRef keyref="google" />
+        <licenseRef keyref="apache" />
+        <!-- TODO - Material design icons -->
+    </credit>
+        <credit key="maven">
+        <component><![CDATA[<a href="http://maven.apache.org">Maven</a>]]></component>
+        <owner><![CDATA[<a href="http://maven.apache.org/team.html">The Maven Team</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <!-- Maven -->
+    </credit>
+    <credit key="mockito">
+        <component><![CDATA[<a href="http://site.mockito.org">Mockito</a>]]></component>
+        <owner><![CDATA[<a href="http://site.mockito.org#who">Mockito contributors</a>]]></owner>
+        <licenseRef keyref="mit" />
+        <artifacts>
+            <artifact groupId="org.mockito" artifactId="mockito-core" />
+        </artifacts>
+    </credit>
+    <credit key="moshi">
+        <component><![CDATA[<a href="http://github.com/square/moshi">Moshi</a>]]></component>
+        <ownerRef keyref="square" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.squareup.moshi" artifactId="moshi" />
+            <artifact groupId="com.squareup.moshi" artifactId="moshi-kotlin-codegen" />
+        </artifacts>
+    </credit>
+    <credit key="okhttp3">
+        <component><![CDATA[<a href="http://square.github.io/okhttp">OkHttp 3</a>]]></component>
+        <ownerRef keyref="square" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.squareup.okhttp3" artifactId="okhttp" />
+        </artifacts>
+    </credit>
+    <credit key="okio">
+        <component><![CDATA[<a href="http://github.com/square/okio">Okio</a>]]></component>
+        <ownerRef keyref="square" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.squareup.okio" artifactId="okio" />
+        </artifacts>
+    </credit>
+    <credit key="openJDK">
+        <component><![CDATA[<a href="http://openjdk.java.net">OpenJDK</a>]]></component>
+        <owner>OpenJDK Community</owner>
+        <license><![CDATA[<a href="http://openjdk.java.net/legal/gplv2+ce.html">GPLv2 + Classpath Exception</a>]]></license>
+        <!-- TODO - OpenJDK -->
+    </credit>
+    <credit key="retrofit2">
+        <component><![CDATA[<a href="http://square.github.io/retrofit">Retrofit 2</a>]]></component>
+        <ownerRef keyref="square" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.squareup.retrofit2" artifactId="retrofit" />
+            <artifact groupId="com.squareup.retrofit2" artifactId="converter-moshi" />
+        </artifacts>
+    </credit>
+    <credit key="slf4j">
+        <component><![CDATA[<a href="http://www.slf4j.org">SLF4J</a>]]></component>
+        <owner><![CDATA[<a href="http://www.qos.ch">QOS.ch</a>]]></owner>
+        <licenseRef keyref="mit" />
+        <artifacts>
+            <artifact groupId="org.slf4j" artifactId="slf4j-api" />
+            <artifact groupId="org.slf4j" artifactId="slf4j-nop" />
+            <artifact groupId="org.slf4j" artifactId="slf4j-simple" />
+        </artifacts>
+    </credit>
+    <credit key="spaceship">
+        <component><![CDATA[<a href="http://www.scoppelletti.it/spaceship">Spaceship</a>]]></component>
+        <owner><![CDATA[<a href="http://www.scoppelletti.it">Dario Scoppelletti</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-bom" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-gms" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-gradle" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-gradle-android" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-gradle-java" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-html" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-http" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-preference" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-security" />
+            <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-stdlib" />
+        </artifacts>
+    </credit>
+    <credit key="thymeleaf">
+        <component><![CDATA[<a href="http://thymeleaf.org">Thymeleaf</a>]]></component>
+        <owner><![CDATA[<a href="http://thymeleaf.org/team.html">The Thymeleaf Team</a>]]></owner>
+        <licenseRef keyref="apache" />
+    </credit>
+    <credit key="threeTenABP">
+        <component><![CDATA[<a href="http://github.com/JakeWharton/ThreeTenABP">ThreeTen Android Backport</a>]]></component>
+        <owner><![CDATA[<a href="http://jakewharton.com">Jake Wharton</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.jakewharton.threetenabp" artifactId="threetenabp" />
+        </artifacts>
+    </credit>
+    <credit key="threeTenBP">
+        <component><![CDATA[<a href="http://www.threeten.org/threetenbp">ThreeTen Backport</a>]]></component>
+        <owner><![CDATA[<a href="http://www.threeten.org">The ThreeTen project</a>]]></owner>
+        <licenseRef keyref="bsd3" />
+        <artifacts>
+            <artifact groupId="org.threeten" artifactId="threetenbp" />
+        </artifacts>
+    </credit>
+    <credit key="zxing">
+        <component><![CDATA[<a href="http://github.com/zxing/zxing">ZXing ("Zebra Crossing")</a>]]></component>
+        <owner>ZXing authors</owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.zxing" artifactId="core" />
+        </artifacts>
+    </credit>
+    <credit key="zxingAndroid">
+        <component><![CDATA[<a href="http://github.com/journeyapps/zxing-android-embedded">ZXIng Android Embedded</a>]]></component>
+        <owner><![CDATA[ZXing authors, <a href="http://journeyapps.com">Journey Mobile]</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.journeyapps" artifactId="zxing-android-embedded" />
+        </artifacts>
+    </credit>
+    <owners>
+        <owner key="android"><![CDATA[<a href="http://source.android.com">The Android Open Source Project</a>]]></owner>
+        <owner key="google"><![CDATA[<a href="http://www.google.com">Google, Inc.</a>]]></owner>
+        <owner key="googleOS"><![CDATA[<a href="http://opensource.google">Google Open Source</a>]]></owner>
+        <owner key="jetbrains"><![CDATA[<a href="http://www.jetbrains.com">JetBrains s.r.o.</a>]]></owner>
+        <owner key="square"><![CDATA[<a href="http://square.github.io">Square, Inc.</a>]]></owner>
+    </owners>
+    <licenses>
+        <license key="android"><![CDATA[<a href="http://developer.android.com/studio/terms.html">Android Software Development Kit License</a>]]></license>
+        <license key="apache"><![CDATA[<a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>]]></license>
+        <license key="bsd3"><![CDATA[<a href="http://opensource.org/licenses/BSD-3-Clause">The 3-Clause BSD License</a>]]></license>
+        <license key="mit"><![CDATA[<a href="http://opensource.org/licenses/MIT">MIT License</a>]]></license>
+    </licenses>
+</credits>
