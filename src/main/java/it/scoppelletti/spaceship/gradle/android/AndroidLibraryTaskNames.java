@@ -19,14 +19,14 @@ package it.scoppelletti.spaceship.gradle.android;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import com.android.build.gradle.api.LibraryVariant;
-import it.scoppelletti.spaceship.gradle.TaskNames;
+import it.scoppelletti.spaceship.gradle.LibraryTaskNames;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * Provides name and description of the tasks.
  */
-final class AndroidTaskNames implements TaskNames {
+final class AndroidLibraryTaskNames implements LibraryTaskNames {
 
     /**
      * Name of the assemble task.
@@ -39,13 +39,13 @@ final class AndroidTaskNames implements TaskNames {
      * Name of the task for generating the source code files.
      */
     @Getter
-    private final String myGenerateSourcesName;
+    private final String generateSourcesName;
 
     /**
      * Name of the task for generating the resource files.
      */
     @Getter
-    private final String myGenerateResourcesName;
+    private final String generateResourcesName;
 
     private final String myGenerateMetainf;
     private final String myPackageSources;
@@ -56,27 +56,28 @@ final class AndroidTaskNames implements TaskNames {
      * Name of the task for packaging the library.
      */
     @Getter
-    private final String myPackageLibraryName;
+    private final String packageLibraryName;
 
     /**
      * Constructor.
      *
      * @param variant Variant.
      */
-    AndroidTaskNames(@Nonnull LibraryVariant variant) {
+    AndroidLibraryTaskNames(@Nonnull LibraryVariant variant) {
         String varName;
 
         myVariant = Objects.requireNonNull(variant,
                 "Argument variant is null.");
 
         varName = StringUtils.capitalize(variant.getName());
-        myGenerateSourcesName = "generate".concat(varName).concat("Sources");
-        myGenerateResourcesName = "generate".concat(varName).concat("Resources");
+        generateSourcesName = "generate".concat(varName).concat("Sources");
+        generateResourcesName = "generate".concat(varName)
+                .concat("Resources");
         myGenerateMetainf = "generate".concat(varName).concat("Metainf");
         myPackageSources = "package".concat(varName).concat("Sources");
         myGenerateKDoc = "generate".concat(varName).concat("KDoc");
         myPackageKDoc = "package".concat(varName).concat("KDoc");
-        myPackageLibraryName = "bundle".concat(varName).concat("Aar");
+        packageLibraryName = "bundle".concat(varName).concat("Aar");
     }
 
     @Nonnull

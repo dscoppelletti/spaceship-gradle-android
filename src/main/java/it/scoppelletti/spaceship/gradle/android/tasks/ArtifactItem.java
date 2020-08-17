@@ -13,40 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package it.scoppelletti.spaceship.gradle.android;
+package it.scoppelletti.spaceship.gradle.android.tasks;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /**
- * Configuration for dependencies.
+ * Artifact.
  */
-@ToString
+@EqualsAndHashCode
 @RequiredArgsConstructor
-final class DependencyConfig {
+final class ArtifactItem {
+    static final String ELEMENT = "artifact";
+    static final String GROUPID_ATTR = "groupId";
+    static final String ARTIFACTID_ATTR = "artifactId";
 
-    /**
-     * Gets the configuration name.
-     */
     @Getter
     @Nonnull
-    private final String name;
+    private final String groupId;
 
-    /**
-     * Gets the dependencies type.
-     */
-    @Getter
-    @Nullable
-    private final String type;
-
-    /**
-     * Gets the dependencies scope.
-     */
     @Getter
     @Nonnull
-    private final String scope;
+    private final String artifactId;
+
+    @Override
+    public String toString() {
+        //noinspection StringBufferReplaceableByString
+        return new StringBuilder(groupId)
+                .append(':')
+                .append(artifactId).toString();
+    }
 }

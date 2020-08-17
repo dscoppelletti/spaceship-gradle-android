@@ -1,4 +1,4 @@
-Spaceship Gradle Plugin for Android Libraries
-=============================================
+Spaceship Gradle Plugins for Android projects
+============================================
 
 * [Spaceship](http://www.scoppelletti.it/spaceship)

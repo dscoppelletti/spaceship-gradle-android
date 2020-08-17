@@ -1,7 +1,7 @@
 
 buildscript {
     ext.BOM = 'it.scoppelletti.spaceship:spaceship-bom:1.0.0'
-    ext.android_gradle_version = '4.0.0'
+    ext.android_gradle_version = '4.0.1'
 
     repositories {
         jcenter()
@@ -26,11 +26,11 @@ plugins {
 }
 
 apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'it.scoppelletti.spaceship.spaceship-gradle-java'
+apply plugin: 'it.scoppelletti.spaceship.java-library'
 
 group 'it.scoppelletti.spaceship'
 version '1.0.0'
-description 'Spaceship Gradle Plugin for Android libraries'
+description 'Spaceship Gradle Plugins for Android projects'
 archivesBaseName = 'spaceship-gradle-android'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -38,9 +38,18 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 gradlePlugin {
     plugins {
+        spaceshipAndroidApp {
+            id = 'it.scoppelletti.spaceship.android-app'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.android.AppPlugin'
+        }
+        spaceshipAndroidLibrary {
+            id = 'it.scoppelletti.spaceship.android-library'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.android.LibraryPlugin'
+        }
+        // Deprecated
         spaceshipAndroid {
             id = 'it.scoppelletti.spaceship.spaceship-gradle-android'
-            implementationClass = 'it.scoppelletti.spaceship.gradle.android.SpaceshipAndroidPlugin'
+            implementationClass = 'it.scoppelletti.spaceship.gradle.android.LibraryPlugin'
         }
     }
 }
@@ -76,6 +85,15 @@ dependencies {
     api 'it.scoppelletti.spaceship:spaceship-gradle'
     api 'org.jetbrains.dokka:dokka-gradle-plugin'
     implementation 'org.apache.commons:commons-lang3'
+    implementation 'org.thymeleaf:thymeleaf'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'junit:junit'
 }
+
+//publishing {
+//    publications {
+// publishSpaceshipGradleAndroidPublicationToDevRepository
+//    ...
+//    }
+//}

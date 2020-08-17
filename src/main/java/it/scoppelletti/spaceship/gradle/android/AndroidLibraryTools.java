@@ -29,7 +29,7 @@ import com.android.build.gradle.api.LibraryVariant;
 import com.android.builder.model.ProductFlavor;
 import com.android.builder.model.SourceProvider;
 import groovy.util.Node;
-import it.scoppelletti.spaceship.gradle.PlatformTools;
+import it.scoppelletti.spaceship.gradle.LibraryTools;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
@@ -46,12 +46,14 @@ import org.gradle.api.tasks.bundling.Jar;
 import org.jetbrains.dokka.gradle.DokkaTask;
 
 /**
- * Tools.
+ * Library tools.
+ *
+ * @since 1.0.0
  */
-final class AndroidTools extends PlatformTools {
+public final class AndroidLibraryTools extends LibraryTools {
     private static final String CONFIG_API = "ApiElements";
     private static final String CONFIG_BOM = "bom";
-    private static final String CONFIG_RUNTIME = "RuntimeElements";
+    public static final String CONFIG_RUNTIME = "RuntimeElements";
     private static final String DIR_TEST = "test";
     private static final String PACKAGING = "aar";
     private static final String SCOPE_COMPILE = "compile";
@@ -59,10 +61,10 @@ final class AndroidTools extends PlatformTools {
     private static final String SCOPE_RUNTIME = "runtime";
     private static final String TYPE_POM = "pom";
     private static final Logger myLogger = Logging.getLogger(
-            AndroidTools.class);
+            AndroidLibraryTools.class);
     private final Project myProject;
     private final LibraryVariant myVariant;
-    private final AndroidTaskNames myTaskNames;
+    private final AndroidLibraryTaskNames myTaskNames;
 
     /**
      * Constructor.
@@ -71,9 +73,10 @@ final class AndroidTools extends PlatformTools {
      * @param variant   Variant.
      * @param taskNames Provides name and description of the tasks.
      */
-    AndroidTools(@Nonnull Project project, @Nonnull LibraryVariant variant,
-            @Nonnull AndroidTaskNames taskNames) {
-        super(project, AndroidTools.PACKAGING, taskNames);
+    AndroidLibraryTools(@Nonnull Project project,
+            @Nonnull LibraryVariant variant,
+            @Nonnull AndroidLibraryTaskNames taskNames) {
+        super(project, AndroidLibraryTools.PACKAGING, taskNames);
 
         myProject = project;
         myVariant = Objects.requireNonNull(variant,
@@ -115,14 +118,13 @@ final class AndroidTools extends PlatformTools {
         source = myProject.files();
         for (SourceProvider sourceSet : myVariant.getSourceSets()) {
             for (File file: sourceSet.getJavaDirectories()) {
-                if (!file.getPath().contains(AndroidTools.DIR_TEST)) {
+                if (!file.getPath().contains(AndroidLibraryTools.DIR_TEST)) {
                     source = source.plus(myProject.files(file));
                 }
             }
         }
 
         jarTask = doPackageSources(source);
-
         jarTask.dependsOn(myTaskNames.getGenerateSourcesName());
     }
 
@@ -204,7 +206,7 @@ final class AndroidTools extends PlatformTools {
         listDeps().forEach(dep -> {
             Node depNode, parentNode;
 
-            if (dep.getScope().equals(AndroidTools.SCOPE_IMPORT)) {
+            if (dep.getScope().equals(AndroidLibraryTools.SCOPE_IMPORT)) {
                 parentNode = depManagementNode;
             } else {
                 parentNode = depsNode;
@@ -241,13 +243,15 @@ final class AndroidTools extends PlatformTools {
         ArrayList<DependencyConfig> list;
 
         list = new ArrayList<>(2);
-        list.add(new DependencyConfig(AndroidTools.CONFIG_BOM,
-                AndroidTools.TYPE_POM, AndroidTools.SCOPE_IMPORT));
-        list.add(new DependencyConfig(varName.concat(AndroidTools.CONFIG_API),
-                null, AndroidTools.SCOPE_COMPILE));
+        list.add(new DependencyConfig(AndroidLibraryTools.CONFIG_BOM,
+                AndroidLibraryTools.TYPE_POM,
+                AndroidLibraryTools.SCOPE_IMPORT));
+        list.add(new DependencyConfig(
+                varName.concat(AndroidLibraryTools.CONFIG_API),
+                null, AndroidLibraryTools.SCOPE_COMPILE));
         list.add(new DependencyConfig(varName.concat(
-                AndroidTools.CONFIG_RUNTIME), null,
-                AndroidTools.SCOPE_RUNTIME));
+                AndroidLibraryTools.CONFIG_RUNTIME), null,
+                AndroidLibraryTools.SCOPE_RUNTIME));
 
         return list;
     }

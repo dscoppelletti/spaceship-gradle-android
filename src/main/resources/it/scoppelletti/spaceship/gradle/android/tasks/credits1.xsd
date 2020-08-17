@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (C) 2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<xs:schema xmlns="http://www.scoppelletti.it/ns/credits/1"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://www.scoppelletti.it/ns/credits/1"
+           targetNamespace="http://www.scoppelletti.it/ns/credits/1"
+           elementFormDefault="qualified">
+    <xs:element name="credits">
+        <xs:annotation>
+            <xs:documentation>Credits database</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="credit" type="creditType"
+                            maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation>Credit item</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="owners" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>Owner database</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="owner" type="ownerType"
+                                        minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>Owner item</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    <xs:key name="ownerKey">
+                        <xs:selector xpath="./tns:owner" />
+                        <xs:field xpath="@key" />
+                    </xs:key>
+                </xs:element>
+                <xs:element name="licenses" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>License database</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="license" type="licenseType"
+                                        minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                    <xs:documentation>License item</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                    <xs:key name="licenseKey">
+                        <xs:selector xpath="./tns:license" />
+                        <xs:field xpath="@key" />
+                    </xs:key>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:int" fixed="1">
+                <xs:annotation>
+                    <xs:documentation>Schema version.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+        <xs:key name="creditKey">
+            <xs:selector xpath="./tns:credit" />
+            <xs:field xpath="@key" />
+        </xs:key>
+        <xs:key name="artifactKey">
+            <xs:selector xpath="./tns:credit/tns:artifacts/tns:artifact" />
+            <xs:field xpath="@groupId" />
+            <xs:field xpath="@artifactId" />
+        </xs:key>
+        <xs:keyref name="ownerKeyRef" refer="ownerKey">
+            <xs:selector xpath="./tns:credit/tns:ownerRef" />
+            <xs:field xpath="@keyref" />
+        </xs:keyref>
+        <xs:keyref name="licenseKeyRef" refer="licenseKey">
+            <xs:selector xpath="./tns:credit/tns:licenseRef" />
+            <xs:field xpath="@keyref" />
+        </xs:keyref>
+    </xs:element>
+    <xs:complexType name="creditType">
+        <xs:sequence>
+            <xs:element name="component" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Component</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="owner" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Owner</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="ownerRef">
+                    <xs:annotation>
+                        <xs:documentation>Owner</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="keyref" type="xs:string"
+                                      use="required">
+                            <xs:annotation>
+                                <xs:documentation>Owner ID</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:choice>
+                <xs:element name="license" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>License</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="licenseRef">
+                    <xs:annotation>
+                        <xs:documentation>License</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="keyref" type="xs:string"
+                                      use="required">
+                            <xs:annotation>
+                                <xs:documentation>License ID</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:element name="artifacts" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Included artifacts</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="artifact" type="artifactType"
+                                    minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>Artifact item</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="key" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Component key</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="artifactType">
+        <xs:attribute name="groupId" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Group ID</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="artifactId" type="xs:string" use="required">
+            <xs:annotation>
+                <xs:documentation>Artifact ID</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="ownerType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="key" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>Owner key</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="licenseType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="key" type="xs:string" use="required">
+                    <xs:annotation>
+                        <xs:documentation>License key</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 /**
- * Spaceship Gradle Plugins for Android projects.
+ * Models.
  *
  * @version 1.0.0
  */
-package it.scoppelletti.spaceship.gradle.android;
+package it.scoppelletti.spaceship.gradle.android.model;

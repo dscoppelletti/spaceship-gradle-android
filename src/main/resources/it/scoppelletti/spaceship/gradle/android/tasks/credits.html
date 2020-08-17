@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Credits</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Credits</h1>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>Owner</th>
+            <th>License</th>
+        </tr>
+        <tr th:each="credit : ${credits}">
+            <td th:utext="${credit.component}"></td>
+            <td th:utext="${credit.owner.text}"></td>
+            <td th:utext="${credit.license.text}"></td>
+        </tr>
+    </table>
+</body>
+</html>

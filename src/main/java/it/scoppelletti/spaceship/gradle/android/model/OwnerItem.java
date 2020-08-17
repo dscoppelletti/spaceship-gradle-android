@@ -14,39 +14,40 @@
  * limitations under the License.
  */
 
-package it.scoppelletti.spaceship.gradle.android;
+package it.scoppelletti.spaceship.gradle.android.model;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Configuration for dependencies.
+ * Owner.
+ *
+ * @since 1.0.0
  */
 @ToString
 @RequiredArgsConstructor
-final class DependencyConfig {
+public final class OwnerItem {
 
     /**
-     * Gets the configuration name.
+     * XML element in credit database.
      */
-    @Getter
-    @Nonnull
-    private final String name;
+    public static final String ELEMENT = "owner";
 
     /**
-     * Gets the dependencies type.
+     * Key.
      */
     @Getter
     @Nullable
-    private final String type;
+    private final String key;
 
     /**
-     * Gets the dependencies scope.
+     * Text.
      */
     @Getter
-    @Nonnull
-    private final String scope;
+    @Setter
+    @Nullable
+    private String text;
 }

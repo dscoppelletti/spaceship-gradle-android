@@ -16,13 +16,13 @@
 
 package it.scoppelletti.spaceship.gradle.android;
 
+import java.net.URI;
 import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import com.android.build.gradle.LibraryExtension;
 import it.scoppelletti.spaceship.gradle.ProjectTools;
 import it.scoppelletti.spaceship.gradle.SpaceshipPlugin;
-import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
@@ -34,14 +34,14 @@ import org.gradle.api.logging.Logging;
  * @since 1.0.0
  */
 @SuppressWarnings("unused")
-public class SpaceshipAndroidPlugin implements Plugin<Project> {
+public class LibraryPlugin implements Plugin<Project> {
     private static final String BUILDTYPE_RELEASE = "release";
     private static final Logger myLogger = Logging.getLogger(
-            SpaceshipAndroidPlugin.class);
+            LibraryPlugin.class);
 
     @Override
     public void apply(@Nonnull Project project) {
-        String devRepoUrl;
+        URI devRepoUrl;
         ProjectTools projectTools;
         LibraryExtension androidExt;
 
@@ -61,24 +61,24 @@ public class SpaceshipAndroidPlugin implements Plugin<Project> {
                         LibraryExtension.class));
 
         androidExt.getLibraryVariants().all(variant -> {
-            AndroidTools platformTools;
-            AndroidTaskNames taskNames;
+            AndroidLibraryTools tools;
+            AndroidLibraryTaskNames taskNames;
 
             if (variant.getName().toLowerCase().contains(
-                    SpaceshipAndroidPlugin.BUILDTYPE_RELEASE)) {
-                taskNames = new AndroidTaskNames(variant);
-                platformTools = new AndroidTools(project, variant, taskNames);
+                    LibraryPlugin.BUILDTYPE_RELEASE)) {
+                taskNames = new AndroidLibraryTaskNames(variant);
+                tools = new AndroidLibraryTools(project, variant, taskNames);
 
-                platformTools.generateMetainf();
-                platformTools.packageSources();
+                tools.generateMetainf();
+                tools.packageSources();
 
                 if (projectTools.isKDocEnabled()) {
-                    platformTools.generateKDoc();
-                    platformTools.packageKDoc();
+                    tools.generateKDoc();
+                    tools.packageKDoc();
                 }
 
-                if (StringUtils.isNotBlank(devRepoUrl)) {
-                    platformTools.publish();
+                if (devRepoUrl != null) {
+                    tools.publish();
                 }
             }
         });
@@ -92,9 +92,9 @@ public class SpaceshipAndroidPlugin implements Plugin<Project> {
             excludes.remove("/META-INF/NOTICE.txt");
             androidExt.getPackagingOptions().setExcludes(excludes);
 
-            if (StringUtils.isNotBlank(devRepoUrl)) {
+            if (devRepoUrl != null) {
                 projectTools.definePublishingRepo(devRepoUrl,
-                        AndroidTaskNames.ASSEMBLE);
+                        AndroidLibraryTaskNames.ASSEMBLE);
             }
         });
     }

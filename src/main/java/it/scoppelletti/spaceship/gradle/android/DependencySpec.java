@@ -38,28 +38,28 @@ final class DependencySpec {
      */
     @Getter
     @Nonnull
-    private final String myGroupId;
+    private final String groupId;
 
     /**
      * Gets the artifact ID.
      */
     @Getter
     @Nonnull
-    private final String myArtifactId;
+    private final String artifactId;
 
     /**
      * Gets the version.
      */
     @Getter
     @Nullable
-    private final String myVersion;
+    private final String version;
 
     /**
      * Gets the classifier.
      */
     @Getter
     @Nullable
-    private final String myClassifier;
+    private final String classifier;
 
     /**
      * Gets the type.
@@ -67,7 +67,7 @@ final class DependencySpec {
     @Getter
     @Nullable
     @EqualsAndHashCode.Exclude
-    private final String myType;
+    private final String type;
 
     /**
      * Gets the scope.
@@ -75,7 +75,7 @@ final class DependencySpec {
     @Getter
     @Nonnull
     @EqualsAndHashCode.Exclude
-    private final String myScope;
+    private final String scope;
 
     /**
      * Constructor.
@@ -90,13 +90,13 @@ final class DependencySpec {
             throw new NullPointerException("Argument scope is null.");
         }
 
-        myGroupId = Objects.requireNonNull(source.getGroup(),
+        groupId = Objects.requireNonNull(source.getGroup(),
             "Argument source.group is null.");
-        myArtifactId = source.getName();
-        myVersion = source.getVersion();
-        myClassifier = DependencySpec.initClassifier(source);
-        myType = type;
-        myScope = scope;
+        artifactId = source.getName();
+        version = source.getVersion();
+        classifier = DependencySpec.initClassifier(source);
+        this.type = type;
+        this.scope = scope;
     }
 
     /**

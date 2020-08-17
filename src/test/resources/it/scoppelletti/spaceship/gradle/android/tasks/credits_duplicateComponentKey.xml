@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<credits xmlns="http://www.scoppelletti.it/ns/credits/1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scoppelletti.it/ns/credits/1 http://www.scoppelletti.it/res/spaceship/gradle/android/tasks/credits1.xsd">
+    <credit key="component1">
+        <component>Component 1</component>
+        <owner>Owner 1</owner>
+        <license>License 1</license>
+        <artifacts>
+            <artifact groupId="group1" artifactId="name1" />
+        </artifacts>
+    </credit>
+    <credit key="component1">
+        <component>Component 2</component>
+        <owner>Owner 2</owner>
+        <license>License 2</license>
+        <artifacts>
+            <artifact groupId="group2" artifactId="name2" />
+        </artifacts>
+    </credit>
+</credits>

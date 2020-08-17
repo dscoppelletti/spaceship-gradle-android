@@ -14,39 +14,69 @@
  * limitations under the License.
  */
 
-package it.scoppelletti.spaceship.gradle.android;
+package it.scoppelletti.spaceship.gradle.android.model;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * Configuration for dependencies.
+ * Credit.
+ *
+ * @since 1.0.0
  */
 @ToString
+@EqualsAndHashCode
 @RequiredArgsConstructor
-final class DependencyConfig {
+public final class CreditItem implements Comparable<CreditItem> {
 
     /**
-     * Gets the configuration name.
+     * XML element in credit database.
+     */
+    public static final String ELEMENT = "credit";
+
+    /**
+     * Key.
      */
     @Getter
     @Nonnull
-    private final String name;
+    private final String key;
 
     /**
-     * Gets the dependencies type.
+     * Component.
      */
     @Getter
+    @Setter
     @Nullable
-    private final String type;
+    @EqualsAndHashCode.Exclude
+    private String component;
 
     /**
-     * Gets the dependencies scope.
+     * Owner.
      */
     @Getter
-    @Nonnull
-    private final String scope;
+    @Setter
+    @Nullable
+    @EqualsAndHashCode.Exclude
+    private OwnerItem owner;
+
+    /**
+     * License.
+     */
+    @Getter
+    @Setter
+    @Nullable
+    @EqualsAndHashCode.Exclude
+    private LicenseItem license;
+
+    @Override
+    public int compareTo(@NotNull CreditItem op) {
+        return StringUtils.compare(key, op.key);
+    }
 }
