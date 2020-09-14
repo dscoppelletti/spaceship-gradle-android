@@ -322,11 +322,6 @@
             <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-stdlib" />
         </artifacts>
     </credit>
-    <credit key="thymeleaf">
-        <component><![CDATA[<a href="http://thymeleaf.org">Thymeleaf</a>]]></component>
-        <owner><![CDATA[<a href="http://thymeleaf.org/team.html">The Thymeleaf Team</a>]]></owner>
-        <licenseRef keyref="apache" />
-    </credit>
     <credit key="threeTenABP">
         <component><![CDATA[<a href="http://github.com/JakeWharton/ThreeTenABP">ThreeTen Android Backport</a>]]></component>
         <owner><![CDATA[<a href="http://jakewharton.com">Jake Wharton</a>]]></owner>
@@ -342,6 +337,11 @@
         <artifacts>
             <artifact groupId="org.threeten" artifactId="threetenbp" />
         </artifacts>
+    </credit>
+    <credit key="thymeleaf">
+        <component><![CDATA[<a href="http://thymeleaf.org">Thymeleaf</a>]]></component>
+        <owner><![CDATA[<a href="http://thymeleaf.org/team.html">The Thymeleaf Team</a>]]></owner>
+        <licenseRef keyref="apache" />
     </credit>
     <credit key="zxing">
         <component><![CDATA[<a href="http://github.com/zxing/zxing">ZXing ("Zebra Crossing")</a>]]></component>

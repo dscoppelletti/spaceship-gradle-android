@@ -93,7 +93,7 @@ dependencies {
 
 //publishing {
 //    publications {
-// publishSpaceshipGradleAndroidPublicationToDevRepository
+// publishSpaceshipGradlePluginForAndroidProjectsPublicationToDevRepository
 //    ...
 //    }
 //}
