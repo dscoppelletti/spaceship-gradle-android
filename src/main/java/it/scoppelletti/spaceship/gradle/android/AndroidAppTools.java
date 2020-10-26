@@ -23,7 +23,6 @@ import javax.annotation.Nonnull;
 import com.android.build.gradle.api.ApplicationVariant;
 import it.scoppelletti.spaceship.gradle.android.model.SpaceshipAppExtension;
 import it.scoppelletti.spaceship.gradle.android.tasks.CreditsTask;
-import it.scoppelletti.spaceship.gradle.model.SpaceshipExtension;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.BasePlugin;

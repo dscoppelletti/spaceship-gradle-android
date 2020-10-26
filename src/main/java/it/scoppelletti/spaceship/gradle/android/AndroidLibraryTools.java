@@ -163,7 +163,7 @@ public final class AndroidLibraryTools extends LibraryTools {
         flavor = myVariant.getMergedFlavor();
         ver = flavor.getVersionName();
         verSuffix = flavor.getVersionNameSuffix();
-        if (StringUtils.isNotBlank(verSuffix)) {
+        if (StringUtils.isNotBlank(ver) && StringUtils.isNotBlank(verSuffix)) {
             ver = ver.concat(verSuffix);
         }
 
