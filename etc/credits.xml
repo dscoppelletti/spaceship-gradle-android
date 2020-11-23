@@ -35,6 +35,7 @@
             <artifact groupId="androidx.recyclerview" artifactId="recyclerview" />
             <artifact groupId="androidx.swiperefreshlayout" artifactId="swiperefreshlayout" />
             <artifact groupId="androidx.viewpager2" artifactId="viewpager2" />
+            <artifact groupId="androidx.webkit" artifactId="webkit" />
         </artifacts>
     </credit>
     <credit key="androidLogger">
@@ -240,7 +241,7 @@
         <licenseRef keyref="apache" />
         <!-- TODO - Material design icons -->
     </credit>
-        <credit key="maven">
+    <credit key="maven">
         <component><![CDATA[<a href="http://maven.apache.org">Maven</a>]]></component>
         <owner><![CDATA[<a href="http://maven.apache.org/team.html">The Maven Team</a>]]></owner>
         <licenseRef keyref="apache" />
@@ -342,6 +343,9 @@
         <component><![CDATA[<a href="http://thymeleaf.org">Thymeleaf</a>]]></component>
         <owner><![CDATA[<a href="http://thymeleaf.org/team.html">The Thymeleaf Team</a>]]></owner>
         <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="org.thymeleaf" artifactId="thymeleaf" />
+        </artifacts>
     </credit>
     <credit key="zxing">
         <component><![CDATA[<a href="http://github.com/zxing/zxing">ZXing ("Zebra Crossing")</a>]]></component>
