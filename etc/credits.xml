@@ -347,6 +347,14 @@
             <artifact groupId="org.thymeleaf" artifactId="thymeleaf" />
         </artifacts>
     </credit>
+    <credit key="vbpd">
+        <component><![CDATA[<a href="http://github.com/kirich1409/ViewBindingPropertyDelegate">ViewBindingPropertyDelegate</a>]]></component>
+        <owner>Kirill Rozov</owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.kirich1409.viewbindingpropertydelegate" artifactId="vbpd-noreflection" />
+        </artifacts>
+    </credit>
     <credit key="zxing">
         <component><![CDATA[<a href="http://github.com/zxing/zxing">ZXing ("Zebra Crossing")</a>]]></component>
         <owner>ZXing authors</owner>
