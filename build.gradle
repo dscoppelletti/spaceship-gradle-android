@@ -1,9 +1,10 @@
 
 buildscript {
     ext.BOM = 'it.scoppelletti.spaceship:spaceship-bom:1.0.0'
-    ext.android_gradle_version = '4.1.1'
+    ext.android_gradle_version = '4.1.2'
 
     repositories {
+        mavenCentral()
         jcenter()
 
         if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
@@ -61,9 +62,9 @@ spaceship {
 }
 
 repositories {
-    jcenter()
     mavenCentral()
     google()
+    jcenter()
 
     if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
         maven {

@@ -204,6 +204,7 @@
         <artifacts>
             <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-android-extensions-runtime" />
             <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-gradle-plugin" />
+            <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-parcelize-runtime" />
             <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-stdlib-jdk8" />
             <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-test" />
             <artifact groupId="org.jetbrains.kotlin" artifactId="kotlin-test-junit" />
