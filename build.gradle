@@ -1,11 +1,10 @@
 
 buildscript {
     ext.BOM = 'it.scoppelletti.spaceship:spaceship-bom:1.0.0'
-    ext.android_gradle_version = '4.1.2'
+    ext.android_gradle_version = '4.2.0'
 
     repositories {
         mavenCentral()
-        jcenter()
 
         if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
             maven {
@@ -47,11 +46,6 @@ gradlePlugin {
             id = 'it.scoppelletti.spaceship.android-library'
             implementationClass = 'it.scoppelletti.spaceship.gradle.android.LibraryPlugin'
         }
-        // Deprecated
-        spaceshipAndroid {
-            id = 'it.scoppelletti.spaceship.spaceship-gradle-android'
-            implementationClass = 'it.scoppelletti.spaceship.gradle.android.LibraryPlugin'
-        }
     }
 }
 
@@ -64,7 +58,6 @@ spaceship {
 repositories {
     mavenCentral()
     google()
-    jcenter()
 
     if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
         maven {
