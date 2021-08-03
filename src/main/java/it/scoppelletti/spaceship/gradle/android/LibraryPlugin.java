@@ -86,6 +86,11 @@ public class LibraryPlugin implements Plugin<Project> {
         project.afterEvaluate(prj -> {
             Set<String> excludes;
 
+            // - AGP 7.0.0
+            // The new class
+            // com.android.build.api.variant.LibraryAndroidComponentsExtension
+            // does not implement the method getPackagingOptions.
+
             // http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
             excludes = androidExt.getPackagingOptions().getExcludes();
             excludes.remove("/META-INF/LICENSE.txt");

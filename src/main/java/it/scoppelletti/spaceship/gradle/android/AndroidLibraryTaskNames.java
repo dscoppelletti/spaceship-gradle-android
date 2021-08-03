@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Provides name and description of the tasks.
  */
+@SuppressWarnings("deprecation")
 final class AndroidLibraryTaskNames implements LibraryTaskNames {
 
     /**
@@ -46,6 +47,12 @@ final class AndroidLibraryTaskNames implements LibraryTaskNames {
      */
     @Getter
     private final String generateResourcesName;
+
+    /**
+     * Name of the task for processing the Java resource files.
+     */
+    @Getter
+    private final String processJavaResName;
 
     private final String myGenerateMetainf;
     private final String myPackageSources;
@@ -71,9 +78,10 @@ final class AndroidLibraryTaskNames implements LibraryTaskNames {
 
         varName = StringUtils.capitalize(variant.getName());
         generateSourcesName = "generate".concat(varName).concat("Sources");
-        generateResourcesName = "generate".concat(varName)
-                .concat("Resources");
+        generateResourcesName = "generate".concat(varName).concat("Resources");
+        processJavaResName = "process".concat(varName).concat("JavaRes");
         myGenerateMetainf = "generate".concat(varName).concat("Metainf");
+
         myPackageSources = "package".concat(varName).concat("Sources");
         myGenerateKDoc = "generate".concat(varName).concat("KDoc");
         myPackageKDoc = "package".concat(varName).concat("KDoc");

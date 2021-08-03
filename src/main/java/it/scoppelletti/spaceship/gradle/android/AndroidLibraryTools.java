@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2019-2021 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import com.android.build.gradle.api.LibraryVariant;
-import com.android.builder.model.ProductFlavor;
 import com.android.builder.model.SourceProvider;
 import groovy.util.Node;
 import it.scoppelletti.spaceship.gradle.LibraryTools;
@@ -50,6 +49,7 @@ import org.jetbrains.dokka.gradle.DokkaTask;
  *
  * @since 1.0.0
  */
+@SuppressWarnings("deprecation")
 public final class AndroidLibraryTools extends LibraryTools {
     private static final String CONFIG_API = "ApiElements";
     private static final String CONFIG_BOM = "bom";
@@ -115,6 +115,9 @@ public final class AndroidLibraryTools extends LibraryTools {
         Jar jarTask;
         FileCollection source;
 
+        // - AGP 7.0.0
+        // The new class com.android.build.api.variant.LibraryVariant does not
+        // implement the method getSourceSets.
         source = myProject.files();
         for (SourceProvider sourceSet : myVariant.getSourceSets()) {
             for (File file: sourceSet.getJavaDirectories()) {
@@ -125,7 +128,8 @@ public final class AndroidLibraryTools extends LibraryTools {
         }
 
         jarTask = doPackageSources(source);
-        jarTask.dependsOn(myTaskNames.getGenerateSourcesName());
+        jarTask.dependsOn(myTaskNames.getGenerateSourcesName(),
+                myTaskNames.getProcessJavaResName());
     }
 
     /**
@@ -149,8 +153,6 @@ public final class AndroidLibraryTools extends LibraryTools {
      * Defines the Maven publication.
      */
     void publish() {
-        String ver, verSuffix;
-        ProductFlavor flavor;
         MavenPublication publ;
 
         publ = doPublish();
@@ -160,14 +162,14 @@ public final class AndroidLibraryTools extends LibraryTools {
                         String.format("Task %1$s not found.",
                                 myTaskNames.getPackageLibraryName())));
 
-        flavor = myVariant.getMergedFlavor();
-        ver = flavor.getVersionName();
-        verSuffix = flavor.getVersionNameSuffix();
-        if (StringUtils.isNotBlank(ver) && StringUtils.isNotBlank(verSuffix)) {
-            ver = ver.concat(verSuffix);
+        // - AGP 7.0.0
+        // I cannot reach version through by variant (neither the deprecated
+        // class com.android.build.gradle.api.LibraryVariant nor the new class
+        // com.android.build.api.variant.LibraryVariant).
+        if (StringUtils.isBlank(publ.getVersion())) {
+            throw new NullPointerException("Project version not set.");
         }
 
-        publ.setVersion(ver);
         publ.pom(this::configurePom);
         publ.pom(pom -> pom.withXml(this::configureDependencies));
     }
@@ -178,7 +180,7 @@ public final class AndroidLibraryTools extends LibraryTools {
      * @param pom POM.
      */
     private void configurePom(@Nonnull MavenPom pom) {
-        pom.setPackaging("aar");
+        pom.setPackaging(AndroidLibraryTools.PACKAGING);
     }
 
     /**

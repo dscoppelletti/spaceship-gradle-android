@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2020-2021 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,16 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Provides name and description of the tasks.
  */
+@SuppressWarnings("deprecation")
 final class AndroidAppTaskNames {
 
     private final ApplicationVariant myVariant;
+
+    /**
+     * Name of the task for merging the assets.
+     */
+    @Getter
+    private final String mergeAssetsName;
 
     /**
      * Name of the task for generating the credit file.
@@ -42,6 +49,7 @@ final class AndroidAppTaskNames {
                 "Argument variant is null.");
 
         varName = StringUtils.capitalize(variant.getName());
+        mergeAssetsName = "merge".concat(varName).concat("Assets");
         generateCreditsName = "generate".concat(varName).concat("Credits");
     }
 

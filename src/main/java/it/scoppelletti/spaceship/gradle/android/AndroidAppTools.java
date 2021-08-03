@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2020-2021 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,14 @@ import it.scoppelletti.spaceship.gradle.android.model.SpaceshipAppExtension;
 import it.scoppelletti.spaceship.gradle.android.tasks.CreditsTask;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Project;
+import org.gradle.api.Task;
 import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.tasks.TaskProvider;
 
 /**
  * Tools.
  */
+@SuppressWarnings("deprecation")
 final class AndroidAppTools {
 
     private final Project myProject;
@@ -68,46 +70,60 @@ final class AndroidAppTools {
         String outputName, templName;
         File assetsDir, outFile;
         URI databaseUrl;
-        TaskProvider<CreditsTask> creditsTask;
+        TaskProvider<Task> assetsTask;
 
         databaseUrl = myAppExt.getCredits().getDatabaseUrl();
         templName = myAppExt.getCredits().getTemplateName();
         outputName = myAppExt.getCredits().getOutputName();
         if (databaseUrl == null || StringUtils.isBlank(outputName) ||
-            StringUtils.isBlank(templName)) {
+                StringUtils.isBlank(templName)) {
             return;
         }
 
         outFile = myProject.getBuildDir().toPath()
                 .resolve("generated")
                 .resolve("it_scoppelletti_credits")
-                .resolve(myVariant.getDirName())
+                .resolve(myVariant.getName())
                 .resolve("assets")
                 .resolve(outputName).toFile();
 
-        creditsTask = myProject.getTasks().register(
+        myProject.getTasks().register(
                 myTaskNames.getGenerateCreditsName(),
                 CreditsTask.class, task -> {
-            task.setDescription(myTaskNames.getGenerateCreditsDescription());
-            task.setGroup(BasePlugin.BUILD_GROUP);
-            task.setVariantName(myVariant.getName());
-            task.setDatabaseUrl(databaseUrl);
-            task.setTemplateName(templName);
-            task.setOutputFile(outFile);
-        });
+                    task.setDescription(myTaskNames.getGenerateCreditsDescription());
+                    task.setGroup(BasePlugin.BUILD_GROUP);
+                    task.setVariantName(myVariant.getName());
+                    task.setDatabaseUrl(databaseUrl);
+                    task.setTemplateName(templName);
+                    task.setOutputFile(outFile);
+                });
 
-        myVariant.getPreBuildProvider().configure(task ->
-                task.dependsOn(creditsTask));
+        assetsTask = myProject.getTasks().named(
+                myTaskNames.getMergeAssetsName());
+
+        // - AGP 7.0.0
+        // If I scan the variant through by the method onVariants of the new
+        // class ApplicationAndroidComponentsExtension, I get the following
+        // error:
+        //
+        // A problem occurred configuring project ':app'.
+        // > Task with name 'mergeDebugAssets' not found in project ':app'.
+        //
+        // But I can see the task mergeDebugAssets in the Gradle view of Android
+        // Studio.
+        
+        assetsTask.configure(task ->
+                task.dependsOn(myTaskNames.getGenerateCreditsName()));
 
         assetsDir = myProject.getBuildDir().toPath()
                 .resolve("intermediates")
                 .resolve("merged_assets")
-                .resolve(myVariant.getDirName())
+                .resolve(myVariant.getName())
                 .resolve("out").toFile();
 
         // No way to add any genetated assets folder to the task MergeAssets,
         // so copy manually into output directory of the task.
-        myVariant.getMergeAssetsProvider().configure(task ->
+        assetsTask.configure(task ->
                 task.doLast(dummy -> {
                     if (!outFile.exists()) {
                         return;
