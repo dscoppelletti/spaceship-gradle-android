@@ -32,7 +32,7 @@ import org.gradle.api.tasks.TaskProvider;
 /**
  * Tools.
  */
-@SuppressWarnings("deprecation")
+// @SuppressWarnings("deprecation")
 final class AndroidAppTools {
 
     private final Project myProject;

@@ -18,7 +18,6 @@ package it.scoppelletti.spaceship.gradle.android;
 
 import java.net.URI;
 import java.util.Objects;
-import java.util.Set;
 import javax.annotation.Nonnull;
 import com.android.build.gradle.LibraryExtension;
 import it.scoppelletti.spaceship.gradle.ProjectTools;
@@ -84,18 +83,22 @@ public class LibraryPlugin implements Plugin<Project> {
         });
 
         project.afterEvaluate(prj -> {
-            Set<String> excludes;
-
             // - AGP 7.0.0
             // The new class
             // com.android.build.api.variant.LibraryAndroidComponentsExtension
             // does not implement the method getPackagingOptions.
 
+            // - AGP 7.1.0
+            // It is too late to modify excludes
+            // It has already been read to configure this project.
+            // Consider either moving this call to be during evaluation,
+            // or using the variant API.
             // http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
-            excludes = androidExt.getPackagingOptions().getExcludes();
-            excludes.remove("/META-INF/LICENSE.txt");
-            excludes.remove("/META-INF/NOTICE.txt");
-            androidExt.getPackagingOptions().setExcludes(excludes);
+//            Set<String> excludes;
+//            excludes = androidExt.getPackagingOptions().getExcludes();
+//            excludes.remove("/META-INF/LICENSE.txt");
+//            excludes.remove("/META-INF/NOTICE.txt");
+//            androidExt.getPackagingOptions().setExcludes(excludes);
 
             if (devRepoUrl != null) {
                 projectTools.definePublishingRepo(devRepoUrl,
