@@ -24,6 +24,7 @@ import com.android.build.gradle.api.ApplicationVariant;
 import it.scoppelletti.spaceship.gradle.android.model.SpaceshipAppExtension;
 import it.scoppelletti.spaceship.gradle.android.tasks.CreditsTask;
 import org.apache.commons.lang3.StringUtils;
+import org.gradle.api.Action;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
 import org.gradle.api.plugins.BasePlugin;
@@ -32,7 +33,7 @@ import org.gradle.api.tasks.TaskProvider;
 /**
  * Tools.
  */
-// @SuppressWarnings("deprecation")
+@SuppressWarnings("deprecation")
 final class AndroidAppTools {
 
     private final Project myProject;
@@ -66,6 +67,7 @@ final class AndroidAppTools {
     /**
      * Defines the task {@code CreditsTask}.
      */
+    @SuppressWarnings("Convert2Lambda")
     void generateCredits() {
         String outputName, templName;
         File assetsDir, outFile;
@@ -90,7 +92,8 @@ final class AndroidAppTools {
         myProject.getTasks().register(
                 myTaskNames.getGenerateCreditsName(),
                 CreditsTask.class, task -> {
-                    task.setDescription(myTaskNames.getGenerateCreditsDescription());
+                    task.setDescription(
+                            myTaskNames.getGenerateCreditsDescription());
                     task.setGroup(BasePlugin.BUILD_GROUP);
                     task.setVariantName(myVariant.getName());
                     task.setDatabaseUrl(databaseUrl);
@@ -117,27 +120,44 @@ final class AndroidAppTools {
 
         assetsDir = myProject.getBuildDir().toPath()
                 .resolve("intermediates")
-                .resolve("merged_assets")
+                .resolve("assets")
                 .resolve(myVariant.getName())
-                .resolve("out").toFile();
+                .resolve("merge"
+                        .concat(StringUtils.capitalize(myVariant.getName()))
+                        .concat("Assets")).toFile();
 
-        // No way to add any genetated assets folder to the task MergeAssets,
-        // so copy manually into output directory of the task.
         assetsTask.configure(task ->
-                task.doLast(dummy -> {
-                    if (!outFile.exists()) {
-                        return;
-                    }
 
-                    if (!assetsDir.exists()) {
-                        //noinspection ResultOfMethodCallIgnored
-                        assetsDir.mkdirs();
-                    }
+                // http://docs.gradle.org/7.2/userguide/validation_problems.html
+                //  #implementation_unknown
+                // Cannot replace Action by lambda
+                task.doLast(new Action<Task>() {
 
-                    myProject.copy(spec -> {
-                        spec.from(outFile);
-                        spec.into(assetsDir);
-                    });
+                    @Override
+                    public void execute(@Nonnull Task task) {
+                        mergeAssets(task, outFile, assetsDir);
+                    }
                 }));
+    }
+
+    /**
+     * No way to add any genetated assets folder to the task MergeAssets, so
+     * copy manually into output directory of the task.
+     */
+    private void mergeAssets(Task task, File outFile, File assetsDir) {
+        if (!outFile.exists()) {
+            return;
+        }
+
+        if (!assetsDir.exists()) {
+            task.getLogger().warn("Folder {} not exists.",
+                    assetsDir);
+            return;
+        }
+
+        myProject.copy(spec -> {
+            spec.from(outFile);
+            spec.into(assetsDir);
+        });
     }
 }
