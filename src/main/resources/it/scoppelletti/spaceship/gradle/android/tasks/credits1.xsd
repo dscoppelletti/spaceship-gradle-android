@@ -162,6 +162,11 @@
                 <xs:documentation>Component key</xs:documentation>
             </xs:annotation>
         </xs:attribute>
+        <xs:attribute name="force" type="xs:boolean" default="false">
+            <xs:annotation>
+                <xs:documentation>Whether the component must be cited regardless the using of its artifacts</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
     <xs:complexType name="artifactType">
         <xs:attribute name="groupId" type="xs:string" use="required">

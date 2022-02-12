@@ -137,6 +137,12 @@ public class CreditsTask extends DefaultTask {
         }
 
         credits = new TreeSet<>();
+        database.getCredits().forEach(item -> {
+            if (item.isForce()) {
+                credits.add(item);
+            }
+        });
+
         config.getAllDependencies().withType(ExternalDependency.class)
                 .forEach(dep -> addDependency(credits, dep, database));
 

@@ -49,6 +49,14 @@ public final class CreditItem implements Comparable<CreditItem> {
     private final String key;
 
     /**
+     * Whether the component must be cited regardless the using of its
+     * artifacts.
+     */
+    @Getter
+    @EqualsAndHashCode.Exclude
+    private final boolean force;
+
+    /**
      * Component.
      */
     @Getter

@@ -18,6 +18,8 @@ package it.scoppelletti.spaceship.gradle.android.tasks;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -58,6 +60,16 @@ final class CreditDatabase {
                 "Argument creditMap is null.");
         myArtifactMap = Objects.requireNonNull(artifactMap,
                 "Argument artifactMap is null.");
+    }
+
+    /**
+     * Gets the credit items.
+     *
+     * @return Collection.
+     */
+    @Nonnull
+    Collection<CreditItem> getCredits() {
+        return Collections.unmodifiableCollection(myCreditMap.values());
     }
 
     /**
@@ -122,6 +134,7 @@ final class CreditDatabase {
         private static final String LICENSE_DATABASE = "licenses";
         private static final String KEY_ATTR = "key";
         private static final String KEYREF_ATTR = "keyref";
+        private static final String FORCE_ATTR = "force";
 
         Map<String, CreditItem> creditMap;
         Map<ArtifactItem, String> artifactMap;
@@ -163,6 +176,7 @@ final class CreditDatabase {
         public void startElement(String uri, String localName, String qName,
                 Attributes attributes) throws SAXException {
             String artifactId, groupId, key;
+            boolean force;
             ArtifactItem artifact;
             LicenseItem license;
             OwnerItem owner;
@@ -176,7 +190,10 @@ final class CreditDatabase {
                             getDocumentLocator());
                 }
 
-                currentCreditItem = new CreditItem(key);
+                force = XmlExt.parseBoolean(attributes.getValue(
+                        XmlHandler.FORCE_ATTR));
+
+                currentCreditItem = new CreditItem(key, force);
                 break;
 
             case XmlHandler.OWNER_DATABASE:

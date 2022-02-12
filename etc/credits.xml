@@ -46,11 +46,10 @@
             <artifact groupId="com.noveogroup.android" artifactId="android-logger" />
         </artifacts>
     </credit>
-    <credit key="androidPlatform">
+    <credit key="androidPlatform" force="true">
         <component><![CDATA[<a href="http://developer.android.com">Android Platform</a>]]></component>
         <ownerRef keyref="android" />
         <licenseRef keyref="android" />
-        <!-- TODO - Android Platform -->
     </credit>
     <credit key="androidStudio">
         <component><![CDATA[<a href="http://developer.android.com/studio/index.html">Android Studio</a>]]></component>
@@ -127,7 +126,6 @@
         <component><![CDATA[<a href="http://www.genymotion.com">Genymotion</a>]]></component>
         <owner><![CDATA[<a href="http://www.genymobile.com">Genymobile SAS</a>]]></owner>
         <license><![CDATA[<a href="http://www.genymotion.com/legal/terms-and-conditions">Free for Personal Use</a>]]></license>
-        <!-- Genymotion -->
     </credit>
     <credit key="glide">
         <component><![CDATA[<a href="http://bumptech.github.io/glide">Glide</a>]]></component>
@@ -173,7 +171,6 @@
         <component><![CDATA[<a href="http://gradle.org">Gradle</a>]]></component>
         <owner><![CDATA[<a href="http://gradle.com">Gradle, Inc.</a>]]></owner>
         <licenseRef keyref="apache" />
-        <!-- Gradle -->
     </credit>
     <credit key="gradleVersionPlugin">
         <component><![CDATA[<a href="http://github.com/ben-manes/gradle-versions-plugin">Gradle Version Plugin</a>]]></component>
@@ -187,7 +184,6 @@
         <component><![CDATA[<a href="http://www.jetbrains.com/idea">IntelliJ IDEA</a>]]></component>
         <ownerRef keyref="jetbrains" />
         <license>Community Edition</license>
-        <!-- IntelliJ IDEA -->
     </credit>
     <credit key="junit">
         <component><![CDATA[<a href="http://junit.org">JUnit</a>]]></component>
@@ -236,17 +232,15 @@
             <artifact groupId="com.google.android.material" artifactId="material" />
         </artifacts>
     </credit>
-    <credit key="materialIcons">
+    <credit key="materialIcons" force="true">
         <component><![CDATA[<a href="http://google.github.io/material-design-icons">Material design icons</a>]]></component>
         <ownerRef keyref="google" />
         <licenseRef keyref="apache" />
-        <!-- TODO - Material design icons -->
     </credit>
     <credit key="maven">
         <component><![CDATA[<a href="http://maven.apache.org">Maven</a>]]></component>
         <owner><![CDATA[<a href="http://maven.apache.org/team.html">The Maven Team</a>]]></owner>
         <licenseRef keyref="apache" />
-        <!-- Maven -->
     </credit>
     <credit key="mockito">
         <component><![CDATA[<a href="http://site.mockito.org">Mockito</a>]]></component>
@@ -281,11 +275,10 @@
             <artifact groupId="com.squareup.okio" artifactId="okio" />
         </artifacts>
     </credit>
-    <credit key="openJDK">
+    <credit key="openJDK" force="true">
         <component><![CDATA[<a href="http://openjdk.java.net">OpenJDK</a>]]></component>
         <owner>OpenJDK Community</owner>
         <license><![CDATA[<a href="http://openjdk.java.net/legal/gplv2+ce.html">GPLv2 + Classpath Exception</a>]]></license>
-        <!-- TODO - OpenJDK -->
     </credit>
     <credit key="retrofit2">
         <component><![CDATA[<a href="http://square.github.io/retrofit">Retrofit 2</a>]]></component>
@@ -294,6 +287,22 @@
         <artifacts>
             <artifact groupId="com.squareup.retrofit2" artifactId="retrofit" />
             <artifact groupId="com.squareup.retrofit2" artifactId="converter-moshi" />
+        </artifacts>
+    </credit>
+    <credit key="rxandroid">
+        <component><![CDATA[<a href="http://github.com/ReactiveX/RxAndroid">RxAndroid</a>]]></component>
+        <owner><![CDATA[<a href="http://reactivex.io">The RxAndroid authors</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="io.reactivex.rxjava2" artifactId="rxandroid" />
+        </artifacts>
+    </credit>
+    <credit key="rxjava">
+        <component><![CDATA[<a href="http://github.com/ReactiveX/RxJava">RxJava 2</a>]]></component>
+        <owner><![CDATA[<a href="http://reactivex.io">The RxJava authors</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="io.reactivex.rxjava2" artifactId="rxjava" />
         </artifacts>
     </credit>
     <credit key="slf4j">
@@ -322,22 +331,6 @@
             <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-preference" />
             <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-security" />
             <artifact groupId="it.scoppelletti.spaceship" artifactId="spaceship-stdlib" />
-        </artifacts>
-    </credit>
-    <credit key="threeTenABP">
-        <component><![CDATA[<a href="http://github.com/JakeWharton/ThreeTenABP">ThreeTen Android Backport</a>]]></component>
-        <owner><![CDATA[<a href="http://jakewharton.com">Jake Wharton</a>]]></owner>
-        <licenseRef keyref="apache" />
-        <artifacts>
-            <artifact groupId="com.jakewharton.threetenabp" artifactId="threetenabp" />
-        </artifacts>
-    </credit>
-    <credit key="threeTenBP">
-        <component><![CDATA[<a href="http://www.threeten.org/threetenbp">ThreeTen Backport</a>]]></component>
-        <owner><![CDATA[<a href="http://www.threeten.org">The ThreeTen project</a>]]></owner>
-        <licenseRef keyref="bsd3" />
-        <artifacts>
-            <artifact groupId="org.threeten" artifactId="threetenbp" />
         </artifacts>
     </credit>
     <credit key="thymeleaf">
