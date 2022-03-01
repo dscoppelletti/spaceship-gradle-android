@@ -67,6 +67,14 @@
             <artifact groupId="org.bouncycastle" artifactId="bcprov-jdk15on" />
         </artifacts>
     </credit>
+    <credit key="colorPickerPreference">
+        <component><![CDATA[<a href="http://github.com/skydoves/ColorPickerPreference">ColorPickerPreference</a>]]></component>
+        <owner><![CDATA[<a href="http://github.com/skydoves">Jaewoong Eum</a>]]></owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.github.skydoves" artifactId="colorpickerpreference" />
+        </artifacts>
+    </credit>
     <credit key="commonsLang">
         <component><![CDATA[<a href="http://commons.apache.org/proper/commons-lang">Commons Lang</a>]]></component>
         <owner><![CDATA[<a href="http://commons.apache.org/proper/commons-lang/team.html">Commons Lang Team</a>]]></owner>
