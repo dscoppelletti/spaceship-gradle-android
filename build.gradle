@@ -109,9 +109,20 @@ test {
     useJUnitPlatform()
 }
 
-//publishing {
+publishing {
 //    publications {
 // publishLibraryPublicationToDevRepository
 //    ...
 //    }
-//}
+
+    repositories {
+        maven {
+            name = 'github'
+            url = 'https://maven.pkg.github.com/dscoppelletti/spaceship'
+            credentials {
+                username = 'dscoppelletti'
+                password = project.property('it.scoppelletti.tools.github.pat')
+            }
+        }
+    }
+}
