@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<credits xmlns="http://www.scoppelletti.it/ns/credits/1"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.scoppelletti.it/ns/credits/1 http://www.scoppelletti.it/res/spaceship/gradle/android/tasks/credits1.xsd">
+    <credit key="openJDK" force="true">
+        <component>OpenJDK</component>
+        <owner>OpenJDK Community</owner>
+        <license>GPLv2 + Classpath Exception</license>
+    </credit>
+    <credit key="androidPlatform" force="true">
+        <component>Android Platform</component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="android" />
+    </credit>
+    <credit key="commonsLang">
+        <component>Commons Lang</component>
+        <owner>Commons Lang Team</owner>
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="org.apache.commons" artifactId="commons-lang3" />
+        </artifacts>
+    </credit>
+    <credit key="androidJetpack">
+        <component>Android Jetpack</component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="androidx.activity" artifactId="activity" />
+            <artifact groupId="androidx.appcompat" artifactId="appcompat" />
+        </artifacts>
+    </credit>
+    <credit key="exoplayer">
+        <component>Exo Player</component>
+        <ownerRef keyref="googleOS" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.android.exoplayer" artifactId="exoplayer-core" />
+            <artifact groupId="com.google.android.exoplayer" artifactId="exoplayer-ui" />
+        </artifacts>
+    </credit>
+    <credit key="materialComponents">
+        <component>Material Design Components for Android</component>
+        <ownerRef keyref="android" />
+        <licenseRef keyref="apache" />
+        <artifacts>
+            <artifact groupId="com.google.android.material" artifactId="material" />
+        </artifacts>
+    </credit>
+    <credit key="glide">
+        <component>Glide</component>
+        <owner>Bump Technologies</owner>
+        <license>BSD, MIT, Apache 2.0</license>
+        <artifacts>
+            <artifact groupId="com.github.bumptech.glide" artifactId="annotations" />
+            <artifact groupId="com.github.bumptech.glide" artifactId="compiler" />
+            <artifact groupId="com.github.bumptech.glide" artifactId="glide" />
+        </artifacts>
+    </credit>
+    <owners>
+        <owner key="android">The Android Open Source Project</owner>
+        <owner key="googleOS">Google Open Source</owner>
+    </owners>
+    <licenses>
+        <license key="android">Android Software Development Kit License</license>
+        <license key="apache">Apache License, Version 2.0</license>
+    </licenses>
+</credits>
