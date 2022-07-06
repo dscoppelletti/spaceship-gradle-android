@@ -8,9 +8,9 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
 
-        if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
+        if (project.hasProperty('it.scoppelletti.spaceship.repository.url')) {
             maven {
-                url project.property('it.scoppelletti.tools.devRepoUrl')
+                url project.property('it.scoppelletti.spaceship.repository.url')
             }
         }
     }
@@ -25,6 +25,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'java-gradle-plugin'
     id 'maven-publish'
+    id 'org.jetbrains.dokka' version '1.6.21'
     id 'com.github.ben-manes.versions' version '0.42.0'
 }
 
@@ -37,6 +38,12 @@ archivesBaseName = 'spaceship-gradle-android'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+spaceship {
+    url = 'http://github.com/dscoppelletti/spaceship-gradle-android'
+    scmUrl = 'git@github.com:dscoppelletti/spaceship-gradle-android.git'
+    inceptionYear = '2019-2022'
+}
 
 gradlePlugin {
     plugins {
@@ -55,12 +62,6 @@ kotlin {
     explicitApi = 'strict'
 }
 
-spaceship {
-    url = 'http://github.com/dscoppelletti/spaceship-gradle-android'
-    scmUrl = 'git@github.com:dscoppelletti/spaceship-gradle-android.git'
-    inceptionYear = '2019-2022'
-}
-
 compileKotlin {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -77,9 +78,9 @@ repositories {
     google()
     mavenCentral()
 
-    if (project.hasProperty('it.scoppelletti.tools.devRepoUrl')) {
+    if (project.hasProperty('it.scoppelletti.spaceship.repository.url')) {
         maven {
-            url project.property('it.scoppelletti.tools.devRepoUrl')
+            url project.property('it.scoppelletti.spaceship.repository.url')
         }
     }
 }
@@ -109,20 +110,9 @@ test {
     useJUnitPlatform()
 }
 
-publishing {
+//publishing {
 //    publications {
 // publishLibraryPublicationToDevRepository
 //    ...
 //    }
-
-    repositories {
-        maven {
-            name = 'github'
-            url = 'https://maven.pkg.github.com/dscoppelletti/spaceship'
-            credentials {
-                username = 'dscoppelletti'
-                password = project.property('it.scoppelletti.tools.github.pat')
-            }
-        }
-    }
-}
+//}

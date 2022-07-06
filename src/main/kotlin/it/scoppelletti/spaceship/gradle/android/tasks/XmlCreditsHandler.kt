@@ -27,14 +27,14 @@ import org.xml.sax.Attributes
 import org.xml.sax.SAXException
 import org.xml.sax.SAXParseException
 
-private const val COMPONENT_ELEMENT = "component"
 private const val OWNER_REF = "ownerRef"
 private const val LICENSE_REF = "licenseRef"
 private const val OWNER_DATABASE = "owners"
 private const val LICENSE_DATABASE = "licenses"
-private const val KEY_ATTR = "key"
-private const val KEYREF_ATTR = "keyref"
-private const val FORCE_ATTR = "force"
+private const val ELEMENT_COMPONENT = "component"
+private const val ATTR_KEY = "key"
+private const val ATTR_KEYREF = "keyref"
+private const val ATTR_FORCE = "force"
 
 /**
  * Credit database parser.
@@ -79,13 +79,13 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
     ) {
         when (localName) {
             CreditElement.ELEMENT -> {
-                val key = attributes?.getValue(KEY_ATTR)
+                val key = attributes?.getValue(ATTR_KEY)
                 if (key.isNullOrBlank()) {
-                    throw SAXParseException("Missing attribute $KEY_ATTR.",
+                    throw SAXParseException("Missing attribute $ATTR_KEY.",
                         locator)
                 }
 
-                val force = XmlExt.parseBoolean(attributes.getValue(FORCE_ATTR))
+                val force = XmlExt.parseBoolean(attributes.getValue(ATTR_FORCE))
                 currentCreditEl = CreditElement(key, force)
             }
 
@@ -97,15 +97,15 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
                 licenseMap = mutableMapOf()
             }
 
-            COMPONENT_ELEMENT -> {
+            ELEMENT_COMPONENT -> {
                 collectContent()
             }
 
             OwnerElement.ELEMENT -> {
                 if (ownerMap != null) {
-                    val key = attributes?.getValue(KEY_ATTR)
+                    val key = attributes?.getValue(ATTR_KEY)
                     if (key.isNullOrBlank()) {
-                        throw SAXParseException("Missing attribute $KEY_ATTR.",
+                        throw SAXParseException("Missing attribute $ATTR_KEY.",
                             locator)
                     }
 
@@ -117,9 +117,9 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
 
             LicenseElement.ELEMENT -> {
                 if (licenseMap != null) {
-                    val key = attributes?.getValue(KEY_ATTR)
+                    val key = attributes?.getValue(ATTR_KEY)
                     if (key.isNullOrBlank()) {
-                        throw SAXParseException("Missing attribute $KEY_ATTR.",
+                        throw SAXParseException("Missing attribute $ATTR_KEY.",
                             locator)
                     }
 
@@ -130,9 +130,9 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
             }
 
             OWNER_REF -> {
-                val key = attributes?.getValue(KEYREF_ATTR)
+                val key = attributes?.getValue(ATTR_KEYREF)
                 if (key.isNullOrBlank()) {
-                    throw SAXParseException("Missing attribute $KEYREF_ATTR.",
+                    throw SAXParseException("Missing attribute $ATTR_KEYREF.",
                         locator)
                 }
 
@@ -146,9 +146,9 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
             }
 
             LICENSE_REF -> {
-                val key = attributes?.getValue(KEYREF_ATTR)
+                val key = attributes?.getValue(ATTR_KEYREF)
                 if (key.isNullOrBlank()) {
-                    throw SAXParseException("Missing attribute $KEYREF_ATTR.",
+                    throw SAXParseException("Missing attribute $ATTR_KEYREF.",
                         locator)
                 }
 
@@ -162,18 +162,18 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
             }
 
             ArtifactElement.ELEMENT -> {
-                val groupId = attributes?.getValue(ArtifactElement.GROUPID_ATTR)
+                val groupId = attributes?.getValue(ArtifactElement.ATTR_GROUPID)
                 if (groupId.isNullOrBlank()) {
                     throw SAXParseException("""Missing attribute
-                        |${ArtifactElement.GROUPID_ATTR}.
+                        |${ArtifactElement.ATTR_GROUPID}.
                         |""".trimMargin().replace('\n', ' '), locator)
                 }
 
                 val artifactId = attributes.getValue(
-                    ArtifactElement.ARTIFACTID_ATTR)
+                    ArtifactElement.ATTR_ARTIFACTID)
                 if (artifactId.isNullOrBlank()) {
                     throw SAXParseException("""Missing attribute
-                        |${ArtifactElement.ARTIFACTID_ATTR}.
+                        |${ArtifactElement.ATTR_ARTIFACTID}.
                         |""".trimMargin().replace('\n', ' '), locator)
                 }
 
@@ -204,11 +204,11 @@ internal class XmlCreditsHandler: XmlDefaultHandler(
                 currentCreditEl = null
             }
 
-            COMPONENT_ELEMENT -> {
+            ELEMENT_COMPONENT -> {
                 currentCreditEl?.let {
                     it.component = getCollectedContent()
                 } ?: run {
-                    throw SAXParseException("""Element $COMPONENT_ELEMENT not
+                    throw SAXParseException("""Element $ELEMENT_COMPONENT not
                         |inner element ${CreditElement.ELEMENT}.
                         |""".trimMargin().replace('\n', ' '), locator)
                 }

@@ -33,14 +33,28 @@ internal class CreditsTools private constructor(
     /**
      * Creates the credits task.
      *
-     * @param variant     Variant.
-     * @param databaseUrl Database URL.
+     * @param variant Variant.
      */
     fun createCreditsTask(
-        variant: ApplicationVariant,
-        databaseUrl: String
+        variant: ApplicationVariant
     ): TaskProvider<CreditsTask> {
         val taskNames = TaskNames.create(variant.name)
+
+        val databaseUrl = try {
+            project.property(CreditsTask.PROP_DATABASE) as String?
+        } catch (ex: MissingPropertyException) {
+            null
+        }
+        project.logger.info(
+            "Property ${CreditsTask.PROP_DATABASE}=$databaseUrl")
+
+        val templateName = try {
+            project.property(CreditsTask.PROP_TEMPLATE) as String?
+        } catch (ex: MissingPropertyException) {
+            null
+        }
+        project.logger.info(
+            "Property ${CreditsTask.PROP_TEMPLATE}=$templateName")
 
         val outDir = project.buildDir
             .resolve("intermediates")
@@ -48,26 +62,12 @@ internal class CreditsTools private constructor(
             .resolve(variant.name)
             .resolve("assets")
 
-        val templateName = try {
-            project.property(CreditsTask.PROP_TEMPLATE) as String?
-        } catch (ex: MissingPropertyException) {
-            null
-        }
-
-        project.logger.info(
-            "Property ${CreditsTask.PROP_TEMPLATE}=$templateName")
-
         return project.tasks.register(taskNames.generateCredits,
             CreditsTask::class.java) { task ->
             task.description = "Creates ${variant.name} credits file"
             task.group = BasePlugin.BUILD_GROUP
             task.variantName.set(variant.name)
-            task.databaseUrl.set(databaseUrl)
             task.outputDir.set(outDir)
-
-            templateName?.let {
-               task.templateName.set(it)
-            }
         }
     }
 

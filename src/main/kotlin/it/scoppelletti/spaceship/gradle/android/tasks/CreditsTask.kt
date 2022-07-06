@@ -30,6 +30,7 @@ import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -51,19 +52,24 @@ private const val TEMPLATE_NAME =
  * @property creditsName  Name of the credits file.
  */
 public abstract class CreditsTask @Inject constructor(
-    objects: ObjectFactory
+    objects: ObjectFactory,
+    providers: ProviderFactory
 ): DefaultTask() {
 
     @get:Input
     public abstract val variantName: Property<String>
 
     @get:Input
-    public abstract val databaseUrl: Property<String>
+    public val databaseUrl: Property<String> =
+        objects.property(String::class.java).apply {
+            convention(providers.gradleProperty(CreditsTask.PROP_DATABASE))
+        }
 
     @get:Input
     public val templateName: Property<String> =
         objects.property(String::class.java).apply {
-            convention(TEMPLATE_NAME)
+            convention(providers.gradleProperty(CreditsTask.PROP_TEMPLATE)
+                .orElse(TEMPLATE_NAME))
         }
 
     @get:OutputDirectory
@@ -108,8 +114,10 @@ public abstract class CreditsTask @Inject constructor(
             try {
                 templ.process(model, writer)
             } catch (ex: IOException) {
+                logger.error("Fail to process $templName.", ex)
                 throw BuildException("Fail to process $templName.", ex)
             } catch (ex: TemplateException) {
+                logger.error("Fail to process $templName.", ex)
                 throw BuildException("Fail to process $templName.", ex)
             }
         }
@@ -143,13 +151,13 @@ public abstract class CreditsTask @Inject constructor(
          * Property containing the URL of the credits database.
          */
         public const val PROP_DATABASE: String =
-            "it.scoppelletti.tools.credits.databaseUrl"
+            "it.scoppelletti.spaceship.credits.databaseUrl"
 
         /**
          * Property containing the URL of the credits template.
          */
         public const val PROP_TEMPLATE: String =
-            "it.scoppelletti.tools.credits.templateName"
+            "it.scoppelletti.spaceship.credits.templateName"
 
         /**
          * Base of the name of the schema.

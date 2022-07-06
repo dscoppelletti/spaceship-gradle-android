@@ -19,7 +19,6 @@ package it.scoppelletti.spaceship.gradle.android
 import com.android.build.api.artifact.MultipleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
-import groovy.lang.MissingPropertyException
 import it.scoppelletti.spaceship.gradle.android.tasks.CreditsTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -52,21 +51,10 @@ public abstract class AppPlugin: Plugin<Project> {
      */
     @Suppress("UnstableApiUsage")
     private fun onVariant(project: Project, variant: ApplicationVariant) {
-        val databaseUrl = try {
-            project.property(CreditsTask.PROP_DATABASE) as String?
-        } catch (ex: MissingPropertyException) {
-            null
-        }
-
-        project.logger.info(
-            "Property ${CreditsTask.PROP_DATABASE}=$databaseUrl")
-
-        databaseUrl?.let { dbUrl ->
-            val tools = CreditsTools.create(project)
-            val creditsTask = tools.createCreditsTask(variant, dbUrl)
-            variant.artifacts.use(creditsTask)
-                .wiredWith(CreditsTask::outputDir)
-                .toAppendTo(MultipleArtifact.ASSETS)
-        }
+        val tools = CreditsTools.create(project)
+        val creditsTask = tools.createCreditsTask(variant)
+        variant.artifacts.use(creditsTask)
+            .wiredWith(CreditsTask::outputDir)
+            .toAppendTo(MultipleArtifact.ASSETS)
     }
 }

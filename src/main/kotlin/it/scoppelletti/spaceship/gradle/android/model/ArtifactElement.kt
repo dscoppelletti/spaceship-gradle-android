@@ -41,11 +41,11 @@ public data class ArtifactElement(
         /**
          * Name of the XML `groupId` attribute.
          */
-        public const val GROUPID_ATTR: String = "groupId"
+        public const val ATTR_GROUPID: String = "groupId"
 
         /**
          * Name of the XML `artifactId` attribute.
          */
-        public const val ARTIFACTID_ATTR: String = "artifactId"
+        public const val ATTR_ARTIFACTID: String = "artifactId"
     }
 }
