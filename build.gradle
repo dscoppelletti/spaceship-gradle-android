@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.agp_version = '7.4.1'
+    ext.agp_version = '7.4.2'
     ext.dokka_version = '1.7.20'
     ext.kotlin_version = '1.8.0'
     ext.KOTLIN_BOM = "org.jetbrains.kotlin:kotlin-bom:${kotlin_version}"

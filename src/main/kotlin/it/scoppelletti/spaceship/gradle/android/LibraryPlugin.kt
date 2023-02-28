@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("RemoveRedundantQualifierName")
-
 package it.scoppelletti.spaceship.gradle.android
 
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
@@ -54,7 +52,7 @@ public abstract class LibraryPlugin: Plugin<Project> {
         project.extensions.findByType(
             LibraryAndroidComponentsExtension::class.java)?.let { ext ->
             ext.onVariants(
-                ext.selector().withBuildType(LibraryPlugin.PUBL_NAME)
+                ext.selector().withBuildType(PUBL_NAME)
             ) { variant ->
                 onVariant(project, androidTools, variant)
             }
@@ -79,15 +77,14 @@ public abstract class LibraryPlugin: Plugin<Project> {
         project: Project,
         androidTools: AndroidTools?
     ) {
-        androidTools?.connectTasks(LibraryPlugin.PUBL_NAME)
+        androidTools?.connectTasks(PUBL_NAME)
         val publTools = PublishTools.create(project) ?: return
 
-        val publ = publTools.createPublication(LibraryPlugin.PUBL_NAME,
-            LibraryPlugin.PUBL_NAME).apply {
+        val publ = publTools.createPublication(PUBL_NAME, PUBL_NAME).apply {
             pom.packaging = AAR_EXTENSION
         }
 
-        val taskNames = TaskNames.create(LibraryPlugin.PUBL_NAME)
+        val taskNames = TaskNames.create(PUBL_NAME)
         val dokkaTools = DokkaTools.create(project)
 
         val logoStylesFile = project.buildDir
