@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2020-2023 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,6 @@ internal class TaskNames private constructor(
     val copyLicense
         get() = "copy${varName}License"
 
-    val copyLicenseIntoLibraryArchive
-        get() = "copy${varName}LicenseIntoLibraryArchive"
-
     val copyLicenseIntoSourceArchive
         get() = "copy${varName}LicenseIntoSourceArchive"
 
@@ -45,17 +42,14 @@ internal class TaskNames private constructor(
     val generateNotice
         get() = "generate${varName}Notice"
 
-    val rezipLibraryArchive
-        get() = "rezip${varName}LibraryArchive"
-
     val rezipSourceArchive
         get() = "rezip${varName}SourceArchive"
 
-    val unzipLibraryArchive
-        get() = "unzip${varName}LibraryArchive"
-
     val unzipSourceArchive
         get() = "unzip${varName}SourceArchive"
+
+    val updateLibraryArchive
+        get() = "update${varName}LibraryArchive"
 
     val zipSourceArchive
         get() = "source${varName}Jar"

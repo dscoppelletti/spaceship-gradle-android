@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2019-2023 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package it.scoppelletti.spaceship.gradle.android
 
+import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.LibraryVariant
+import it.scoppelletti.spaceship.gradle.android.tasks.UpdateLibraryArtifactTask
 import java.io.File
 import org.gradle.api.Project
 import org.gradle.api.plugins.BasePlugin
-import org.gradle.api.plugins.BasePluginExtension
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.TaskProvider
@@ -30,65 +31,37 @@ import org.gradle.api.tasks.bundling.Zip
  * Tools for Android compilation.
  */
 internal class AndroidTools(
-    private val project: Project,
-    private val convention: BasePluginExtension,
+    private val project: Project
 ) {
 
     /**
      * Creates the library archive trasformation.
      *
      * @param  variant Variant.
-     * @param  metaInf META-INF resource folder.
+     * @param  metaInf Folder of the license files.
      * @return         The task provider.
      */
     fun createLibraryArchiveTransform(
         variant: LibraryVariant,
         metaInf: File
-    ): TaskProvider<Copy> {
+    ): TaskProvider<UpdateLibraryArtifactTask> {
         val taskNames = TaskNames.create(variant.name)
 
-        val libraryArchive = project.buildDir
-            .resolve("outputs")
-            .resolve("aar")
-            .resolve("${convention.archivesName.get()}-${variant.name}.aar")
-
-        val workDir = project.buildDir
-            .resolve("intermediates")
-            .resolve(AndroidTools::class.java.canonicalName)
-            .resolve("libraryArchiveTransform")
-            .resolve(variant.name)
-
-        val unzipTask = project.tasks.register(taskNames.unzipLibraryArchive,
-            Copy::class.java) { task ->
-            task.description = "Unzip ${variant.name} library archive"
-            task.group = BasePlugin.BUILD_GROUP
-            task.from(project.zipTree(libraryArchive))
-            task.destinationDir = workDir
-            task.outputs.upToDateWhen { false }
+        val transformTask = project.tasks.register(
+            taskNames.updateLibraryArchive,
+            UpdateLibraryArtifactTask::class.java
+        ) { task ->
+            task.metainfDir.set(metaInf)
         }
 
-        val copyTask = project.tasks.register(
-            taskNames.copyLicenseIntoLibraryArchive, Copy::class.java) { task ->
-            task.description = "Copies the license files"
-            task.group = BasePlugin.BUILD_GROUP
-            task.dependsOn(unzipTask)
-            task.from(metaInf)
-            task.destinationDir = workDir.resolve("META-INF")
-        }
+        variant.artifacts.use(transformTask)
+            .wiredWithFiles(
+                UpdateLibraryArtifactTask::initialArtifact,
+                UpdateLibraryArtifactTask::updatedArtifact
+            )
+            .toTransform(SingleArtifact.AAR)
 
-        project.tasks.register(taskNames.rezipLibraryArchive,
-            Zip::class.java) { task ->
-            task.description = "Rezip ${variant.name} library archive"
-            task.group = BasePlugin.BUILD_GROUP
-            task.dependsOn(copyTask)
-            task.from(workDir)
-            task.include("**/**")
-            task.archiveFileName.set(libraryArchive.name)
-            task.destinationDirectory.set(libraryArchive.parentFile)
-            task.outputs.upToDateWhen { false }
-        }
-
-        return unzipTask
+        return transformTask
     }
 
     /**
@@ -173,10 +146,10 @@ internal class AndroidTools(
             return
         }
 
-        val rezipTask = project.tasks.findByName(taskNames.rezipLibraryArchive)
+        val rezipTask = project.tasks.findByName(taskNames.updateLibraryArchive)
         if (rezipTask == null) {
             project.logger.error(
-                "Task ${taskNames.rezipLibraryArchive} not found.")
+                "Task ${taskNames.updateLibraryArchive} not found.")
             return
         }
 
@@ -214,16 +187,6 @@ internal class AndroidTools(
          * @param  project Project.
          * @return         The new object.
          */
-        fun create(project: Project): AndroidTools? {
-            val convention = project.extensions.findByType(
-                BasePluginExtension::class.java)
-            if (convention == null) {
-                project.logger.error(
-                    "Extension ${BasePluginExtension::class.java} not found.")
-                return null
-            }
-
-            return AndroidTools(project, convention)
-        }
+        fun create(project: Project) = AndroidTools(project)
     }
 }
