@@ -245,14 +245,6 @@
             <artifact groupId="io.github.microutils" artifactId="kotlin-logging" />
         </artifacts>
     </credit>
-    <credit key="lombok">
-        <component><![CDATA[<a href="http://projectlombok.org">Project Lombok</a>]]></component>
-        <owner><![CDATA[<a href="http://projectlombok.org/credits">Authors and contributors</a>]]></owner>
-        <licenseRef keyref="mit" />
-        <artifacts>
-            <artifact groupId="org.projectlombok" artifactId="lombok" />
-        </artifacts>
-    </credit>
     <credit key="materialComponents">
         <component><![CDATA[<a href="http://material.io/develop/android">Material Design Components for Android</a>]]></component>
         <ownerRef keyref="android" />
