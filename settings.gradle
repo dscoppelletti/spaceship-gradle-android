@@ -1,1 +1,32 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        google()
+
+        if (settings.hasProperty('it.scoppelletti.spaceship.repository.url')) {
+            maven {
+                url settings['it.scoppelletti.spaceship.repository.url']
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        google()
+
+        if (settings.hasProperty('it.scoppelletti.spaceship.repository.url')) {
+            maven {
+                url settings['it.scoppelletti.spaceship.repository.url']
+            }
+        }
+    }
+    versionCatalogs {
+        libs {
+            from('it.scoppelletti.spaceship:spaceship-catalog:1.1.0')
+        }
+    }
+}
 rootProject.name = 'spaceship-gradle-android'
