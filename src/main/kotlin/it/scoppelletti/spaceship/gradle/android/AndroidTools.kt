@@ -125,43 +125,9 @@ internal class AndroidTools(
     /**
      * Connects the tasks.
      *
-     * @param varName Variant name.
-     */
-    fun connectTasks(varName: String) {
-        val taskNames = TaskNames.create(varName)
-
-        connectLibraryArchiveTasks(taskNames)
-        connectSourceArchiveTasks(taskNames)
-    }
-
-    /**
-     * Connects the tasks.
-     *
      * @param taskNames Task names.
      */
-    private fun connectLibraryArchiveTasks(taskNames: TaskNames) {
-        val bundleTask = project.tasks.findByName(taskNames.bundleAar)
-        if (bundleTask == null) {
-            project.logger.error("Task ${taskNames.bundleAar} not found.")
-            return
-        }
-
-        val rezipTask = project.tasks.findByName(taskNames.updateLibraryArchive)
-        if (rezipTask == null) {
-            project.logger.error(
-                "Task ${taskNames.updateLibraryArchive} not found.")
-            return
-        }
-
-        bundleTask.finalizedBy(rezipTask)
-    }
-
-    /**
-     * Connects the tasks.
-     *
-     * @param taskNames Task names.
-     */
-    private fun connectSourceArchiveTasks(taskNames: TaskNames) {
+    fun connectTasks(taskNames: TaskNames) {
         val bundleTask = project.tasks.findByName(taskNames.zipSourceArchive)
         if (bundleTask == null) {
             project.logger.error(
@@ -177,6 +143,18 @@ internal class AndroidTools(
         }
 
         bundleTask.finalizedBy(rezipTask)
+
+        project.tasks.findByName(taskNames.unzipSourceArchive)
+            ?.dependsOn(bundleTask) ?: run {
+            project.logger.error(
+                "Task ${taskNames.unzipSourceArchive} not found.")
+        }
+
+        project.tasks.findByName(taskNames.generateMetadataFile)
+            ?.dependsOn(rezipTask) ?: run {
+            project.logger.error(
+                "Task ${taskNames.generateMetadataFile} not found.")
+        }
     }
 
     companion object {

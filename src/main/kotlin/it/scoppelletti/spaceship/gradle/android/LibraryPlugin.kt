@@ -76,7 +76,6 @@ public abstract class LibraryPlugin: Plugin<Project> {
         project: Project,
         androidTools: AndroidTools
     ) {
-        androidTools.connectTasks(PUBL_NAME)
         val publTools = PublishTools.create(project) ?: return
 
         val publ = publTools.createPublication(PUBL_NAME, PUBL_NAME).apply {
@@ -84,6 +83,7 @@ public abstract class LibraryPlugin: Plugin<Project> {
         }
 
         val taskNames = TaskNames.create(PUBL_NAME)
+        androidTools.connectTasks(taskNames)
         val dokkaTools = DokkaTools.create(project)
 
         val logoStylesFile = project.buildDir

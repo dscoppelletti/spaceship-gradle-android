@@ -24,9 +24,6 @@ import org.apache.commons.lang3.StringUtils
 internal class TaskNames private constructor(
     private val varName: String
 ) {
-    val bundleAar
-        get() = "bundle${varName}Aar"
-
     val copyLicense
         get() = "copy${varName}License"
 
@@ -38,6 +35,9 @@ internal class TaskNames private constructor(
 
     val generateCredits
         get() = "generate${varName}Credits"
+
+    val generateMetadataFile
+        get() = "generateMetadataFileFor${varName}Publication"
 
     val generateNotice
         get() = "generate${varName}Notice"

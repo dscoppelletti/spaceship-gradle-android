@@ -41,7 +41,7 @@ gradlePlugin {
 
 kotlin {
     explicitApi()
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 configurations {
@@ -69,9 +69,3 @@ test {
     useJUnitPlatform()
 }
 
-//publishing {
-//    publications {
-// publishLibraryPublicationToDevRepository
-//    ...
-//    }
-//}
