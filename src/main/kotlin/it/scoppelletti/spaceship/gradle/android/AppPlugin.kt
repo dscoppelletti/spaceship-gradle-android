@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020-2022 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2020-2023 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package it.scoppelletti.spaceship.gradle.android
 
-import com.android.build.api.artifact.MultipleArtifact
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import it.scoppelletti.spaceship.gradle.android.tasks.CreditsTask
@@ -53,8 +52,7 @@ public abstract class AppPlugin: Plugin<Project> {
     private fun onVariant(project: Project, variant: ApplicationVariant) {
         val tools = CreditsTools.create(project)
         val creditsTask = tools.createCreditsTask(variant)
-        variant.artifacts.use(creditsTask)
-            .wiredWith(CreditsTask::outputDir)
-            .toAppendTo(MultipleArtifact.ASSETS)
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            creditsTask, CreditsTask::outputDir)
     }
 }

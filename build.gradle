@@ -1,48 +1,29 @@
+
 buildscript {
-    ext.agp_version = '7.2.1'
-    ext.kotlin_version = '1.6.21'
-    ext.KOTLIN_BOM = "org.jetbrains.kotlin:kotlin-bom:${kotlin_version}"
-    ext.SPACESHIP_BOM = 'it.scoppelletti.spaceship:spaceship-bom:1.0.0'
-
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-
-        if (project.hasProperty('it.scoppelletti.spaceship.repository.url')) {
-            maven {
-                url project.property('it.scoppelletti.spaceship.repository.url')
-            }
-        }
-    }
-    dependencies {
-        classpath platform(KOTLIN_BOM)
-        classpath platform(SPACESHIP_BOM)
-        classpath 'it.scoppelletti.spaceship:spaceship-gradle'
-    }
+    ext.agp_version = libs.versions.agp.get()
+    ext.dokka_version = libs.versions.dokka.get()
+    ext.spaceship_version = libs.versions.spaceship.get()
 }
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'java-gradle-plugin'
     id 'maven-publish'
-    id 'org.jetbrains.dokka' version '1.6.21'
-    id 'com.github.ben-manes.versions' version '0.42.0'
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.versions)
+    alias(libs.plugins.spaceship.java.lib)
 }
 
-apply plugin: 'it.scoppelletti.spaceship.java-library'
-
 group = 'it.scoppelletti.spaceship'
-version = '1.0.0'
+version = '1.1.0'
 description 'Spaceship Gradle Plugins for Android projects'
 archivesBaseName = 'spaceship-gradle-android'
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 spaceship {
     url = 'http://github.com/dscoppelletti/spaceship-gradle-android'
     scmUrl = 'git@github.com:dscoppelletti/spaceship-gradle-android.git'
-    inceptionYear = '2019-2022'
+    inceptionYear = '2019-2023'
 }
 
 gradlePlugin {
@@ -59,30 +40,8 @@ gradlePlugin {
 }
 
 kotlin {
-    explicitApi = 'strict'
-}
-
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-}
-
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-}
-
-repositories {
-    google()
-    mavenCentral()
-
-    if (project.hasProperty('it.scoppelletti.spaceship.repository.url')) {
-        maven {
-            url project.property('it.scoppelletti.spaceship.repository.url')
-        }
-    }
+    explicitApi()
+    jvmToolchain(17)
 }
 
 configurations {
@@ -93,14 +52,14 @@ configurations {
 }
 
 dependencies {
-    bom platform(KOTLIN_BOM)
-    bom platform(SPACESHIP_BOM)
+    bom platform(libs.bom.kotlin)
+    bom platform(libs.bom.spaceship)
     api gradleApi()
     api "com.android.tools.build:gradle:${agp_version}"
-    api 'it.scoppelletti.spaceship:spaceship-gradle'
+    api "it.scoppelletti.spaceship:spaceship-gradle:${spaceship_version}"
     implementation 'org.apache.commons:commons-lang3'
     implementation 'org.freemarker:freemarker'
-    implementation 'org.jetbrains.dokka:dokka-gradle-plugin'
+    implementation "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
     testImplementation gradleTestKit()
     testImplementation 'io.kotest:kotest-assertions-core'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
@@ -110,9 +69,3 @@ test {
     useJUnitPlatform()
 }
 
-//publishing {
-//    publications {
-// publishLibraryPublicationToDevRepository
-//    ...
-//    }
-//}

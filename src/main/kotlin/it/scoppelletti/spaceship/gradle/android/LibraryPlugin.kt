@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2022 Dario Scoppelletti, <http://www.scoppelletti.it/>.
+ * Copyright (C) 2019-2023 Dario Scoppelletti, <http://www.scoppelletti.it/>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-@file:Suppress("RemoveRedundantQualifierName")
-
 package it.scoppelletti.spaceship.gradle.android
 
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.api.variant.LibraryVariant
-import com.android.build.gradle.internal.tasks.factory.dependsOn
 import it.scoppelletti.spaceship.gradle.DokkaTools
 import it.scoppelletti.spaceship.gradle.JarTools
 import it.scoppelletti.spaceship.gradle.LicenseTools
@@ -54,7 +51,7 @@ public abstract class LibraryPlugin: Plugin<Project> {
         project.extensions.findByType(
             LibraryAndroidComponentsExtension::class.java)?.let { ext ->
             ext.onVariants(
-                ext.selector().withBuildType(LibraryPlugin.PUBL_NAME)
+                ext.selector().withBuildType(PUBL_NAME)
             ) { variant ->
                 onVariant(project, androidTools, variant)
             }
@@ -77,17 +74,16 @@ public abstract class LibraryPlugin: Plugin<Project> {
      */
     private fun onProjectAfterEvaluate(
         project: Project,
-        androidTools: AndroidTools?
+        androidTools: AndroidTools
     ) {
-        androidTools?.connectTasks(LibraryPlugin.PUBL_NAME)
         val publTools = PublishTools.create(project) ?: return
 
-        val publ = publTools.createPublication(LibraryPlugin.PUBL_NAME,
-            LibraryPlugin.PUBL_NAME).apply {
+        val publ = publTools.createPublication(PUBL_NAME, PUBL_NAME).apply {
             pom.packaging = AAR_EXTENSION
         }
 
-        val taskNames = TaskNames.create(LibraryPlugin.PUBL_NAME)
+        val taskNames = TaskNames.create(PUBL_NAME)
+        androidTools.connectTasks(taskNames)
         val dokkaTools = DokkaTools.create(project)
 
         val logoStylesFile = project.buildDir
@@ -145,7 +141,7 @@ public abstract class LibraryPlugin: Plugin<Project> {
      */
     private fun onVariant(
         project: Project,
-        androidTools: AndroidTools?,
+        androidTools: AndroidTools,
         variant: LibraryVariant
     ) {
         val metainfDeps = mutableListOf<TaskProvider<out Task>>()
@@ -184,13 +180,15 @@ public abstract class LibraryPlugin: Plugin<Project> {
             }
         }
 
-        androidTools?.let {
-            it.createLibraryArchiveTransform(variant, metainfDir).apply {
-                dependsOn(metainfTask)
+        androidTools.createLibraryArchiveTransform(variant, metainfDir).apply {
+            configure { task ->
+                task.dependsOn(metainfTask)
             }
+        }
 
-            it.createSourceArchiveTransform(variant, metainfDir).apply {
-                dependsOn(metainfTask)
+        androidTools.createSourceArchiveTransform(variant, metainfDir).apply {
+            configure { task ->
+                task.dependsOn(metainfTask)
             }
         }
     }

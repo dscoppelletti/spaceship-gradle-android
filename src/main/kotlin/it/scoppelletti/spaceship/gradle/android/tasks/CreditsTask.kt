@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@file:Suppress("RemoveRedundantQualifierName")
-
 package it.scoppelletti.spaceship.gradle.android.tasks
 
 import freemarker.template.TemplateException
@@ -62,13 +60,13 @@ public abstract class CreditsTask @Inject constructor(
     @get:Input
     public val databaseUrl: Property<String> =
         objects.property(String::class.java).apply {
-            convention(providers.gradleProperty(CreditsTask.PROP_DATABASE))
+            convention(providers.gradleProperty(PROP_DATABASE))
         }
 
     @get:Input
     public val templateName: Property<String> =
         objects.property(String::class.java).apply {
-            convention(providers.gradleProperty(CreditsTask.PROP_TEMPLATE)
+            convention(providers.gradleProperty(PROP_TEMPLATE)
                 .orElse(TEMPLATE_NAME))
         }
 
@@ -78,7 +76,7 @@ public abstract class CreditsTask @Inject constructor(
     @get:Input
     public val creditsName: Property<String> =
         objects.property(String::class.java).apply {
-            convention(CreditsTask.CREDITS_NAME)
+            convention(CREDITS_NAME)
         }
 
     @TaskAction
